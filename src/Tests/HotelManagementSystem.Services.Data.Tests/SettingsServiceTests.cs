@@ -17,7 +17,7 @@
 
     public class SettingsServiceTests
     {
-        [Fact]
+        /*[Fact]
         public void GetCountShouldReturnCorrectNumber()
         {
             var repository = new Mock<IDeletableEntityRepository<Setting>>();
@@ -46,6 +46,6 @@
             using var repository = new EfDeletableEntityRepository<Setting>(dbContext);
             var service = new SettingsService(repository);
             Assert.Equal(3, service.GetCount());
-        }
+        }*/
     }
 }

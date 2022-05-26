@@ -8,7 +8,6 @@
     using HotelManagementSystem.Data.Models;
     using HotelManagementSystem.Data.Repositories;
     using HotelManagementSystem.Data.Seeding;
-    using HotelManagementSystem.Services.Data;
     using HotelManagementSystem.Services.Mapping;
     using HotelManagementSystem.Services.Messaging;
     using HotelManagementSystem.Web.ViewModels;
@@ -64,7 +63,6 @@
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
-            services.AddTransient<ISettingsService, SettingsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

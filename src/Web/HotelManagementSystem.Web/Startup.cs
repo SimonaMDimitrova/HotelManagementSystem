@@ -8,8 +8,10 @@
     using HotelManagementSystem.Data.Models;
     using HotelManagementSystem.Data.Repositories;
     using HotelManagementSystem.Data.Seeding;
+    using HotelManagementSystem.Services.Data;
     using HotelManagementSystem.Services.Mapping;
     using HotelManagementSystem.Services.Messaging;
+    using HotelManagementSystem.Web.InputModels;
     using HotelManagementSystem.Web.ViewModels;
 
     using Microsoft.AspNetCore.Builder;
@@ -63,12 +65,15 @@
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
+            services.AddTransient<IAboutUsInfoService, AboutUsInfoService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+            AutoMapperConfig.RegisterMappings(
+                typeof(ErrorViewModel).GetTypeInfo().Assembly,
+                typeof(AboutUsInfoInputModel).GetTypeInfo().Assembly);
 
             // Seed data on application startup
             using (var serviceScope = app.ApplicationServices.CreateScope())

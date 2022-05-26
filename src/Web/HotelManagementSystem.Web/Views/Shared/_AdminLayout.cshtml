@@ -1,0 +1,72 @@
+﻿@using HotelManagementSystem.Common
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@this.ViewData["Title"] - @GlobalConstants.SystemName - Administration</title>
+    <link rel="icon" href="~/favicon.png" type="image/png">
+
+	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet'>
+	<!-- Syntax Highlighter -->
+	<link rel="stylesheet" type="text/css" href="~/administration/syntax-highlighter/styles/shCore.css" media="all" asp-append-version="true">
+	<link rel="stylesheet" type="text/css" href="~/administration/syntax-highlighter/styles/shThemeDefault.css" media="all" asp-append-version="true">
+
+	<!-- Font Awesome CSS-->
+	<link rel="stylesheet" href="~/administration/css/font-awesome.min.css" asp-append-version="true">
+
+	<!-- Normalize/Reset CSS-->
+	<link rel="stylesheet" href="~/administration/css/normalize.min.css" asp-append-version="true">
+
+	<!-- Main CSS-->
+	<link rel="stylesheet" href="~/administration/css/main.css" asp-append-version="true">
+	    <link rel="stylesheet" href="~/general/css/style.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/general/css/responsive.css" asp-append-version="true">
+
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="~/general/css/bootstrap.css" asp-append-version="true">
+</head>
+<body id="welcome">
+<aside class="left-sidebar">
+		<div class="logo">
+			<a href="#welcome">
+				<img src="img/logo.png" alt="">
+			</a>
+		</div>
+		<nav class="left-nav">
+			<ul id="nav">
+				<li class="current"><a href="#welcome">General</a></li>
+				<li><a href="#installation">Manage contacts</a></li>
+				<li><a href="#installation">Manage roles</a></li>
+				<li><a href="#tmpl-structure">Manual reservation</a></li>
+				<li><a href="#css-structure">Check-in/out</a></li>
+				<li><a href="#javascript">Manage rooms</a></li>
+				<li><a href="#contact-form">Vouchering system</a></li>
+				<li><a href="#subscription-form">Reports</a></li>
+			</ul>
+		</nav>
+	</aside>
+	
+	<div id="main-wrapper">
+		<div class="main-content">
+		<partial name="_CookieConsentPartial" />
+        <main role="main" class="pb-3">
+            @this.RenderBody()
+        </main>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="~/administration/js/jquery-1.11.0.min.js" asp-append-version="true"></script>
+	<script type="text/javascript" src="~/administration/js/jquery.nav.js" asp-append-version="true"></script>
+	<script type="text/javascript" src="~/administration/syntax-highlighter/scripts/shCore.js" asp-append-version="true"></script>
+	<script type="text/javascript" src="~/administration/syntax-highlighter/scripts/shBrushXml.js" asp-append-version="true"></script>
+	<script type="text/javascript" src="~/administration/syntax-highlighter/scripts/shBrushCss.js" asp-append-version="true"></script>
+	<script type="text/javascript" src="~/administration/syntax-highlighter/scripts/shBrushJScript.js" asp-append-version="true"></script>
+	<script type="text/javascript" src="~/administration/syntax-highlighter/scripts/shBrushPhp.js" asp-append-version="true"></script>
+	<script type="text/javascript">
+	    SyntaxHighlighter.all()
+	</script>
+	<script type="text/javascript" src="js/custom.js"></script>
+    @await this.RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

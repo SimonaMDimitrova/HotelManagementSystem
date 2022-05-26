@@ -24,6 +24,10 @@
         {
         }
 
+        public DbSet<AboutUsInfo> AboutUsPageInfo { get; set; }
+
+        public DbSet<Image> Image { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

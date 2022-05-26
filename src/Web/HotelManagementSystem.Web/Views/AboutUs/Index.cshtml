@@ -1,0 +1,20 @@
+﻿@model AboutUsInfoViewModel
+@{
+    this.ViewData["Title"] = "About us";
+}
+
+<section class="about_history_area section_gap">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 d_flex align-items-center">
+                <div class="about_content ">
+                    <h2 class="title title_color">@Model.Title</h2>
+                    <p>@Model.Description</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <img class="img-fluid" src="@Model.ImageUrl" alt="img">
+            </div>
+        </div>
+    </div>
+</section>

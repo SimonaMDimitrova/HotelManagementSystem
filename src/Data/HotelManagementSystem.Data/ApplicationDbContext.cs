@@ -28,6 +28,8 @@
 
         public DbSet<Image> Image { get; set; }
 
+        public DbSet<Contact> Contact { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

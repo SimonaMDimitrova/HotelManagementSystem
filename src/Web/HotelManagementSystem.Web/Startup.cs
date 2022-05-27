@@ -11,7 +11,7 @@
     using HotelManagementSystem.Services.Data;
     using HotelManagementSystem.Services.Mapping;
     using HotelManagementSystem.Services.Messaging;
-    using HotelManagementSystem.Web.InputModels;
+    using HotelManagementSystem.Web.InputModels.Area.Administration.General;
     using HotelManagementSystem.Web.ViewModels;
 
     using Microsoft.AspNetCore.Builder;
@@ -48,6 +48,9 @@
                         options.MinimumSameSitePolicy = SameSiteMode.None;
                     });
 
+            services.AddControllersWithViews()
+               .AddJsonOptions(options =>
+                   options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve);
             services.AddControllersWithViews(
                 options =>
                     {
@@ -66,6 +69,7 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<IAboutUsInfoService, AboutUsInfoService>();
+            services.AddTransient<IContactService, ContactService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

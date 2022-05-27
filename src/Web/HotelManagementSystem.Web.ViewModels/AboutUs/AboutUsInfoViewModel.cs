@@ -1,4 +1,4 @@
-﻿namespace HotelManagementSystem.Web.ViewModels
+﻿namespace HotelManagementSystem.Web.ViewModels.AboutUs
 {
     using AutoMapper;
     using HotelManagementSystem.Data.Models;

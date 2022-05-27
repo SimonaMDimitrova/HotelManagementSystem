@@ -1,12 +1,13 @@
 ﻿namespace HotelManagementSystem.Data.Seeding
 {
-    using HotelManagementSystem.Data.Models;
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+
+    using HotelManagementSystem.Data.Models;
 
     internal class AboutUsInfoSeeder : ISeeder
     {

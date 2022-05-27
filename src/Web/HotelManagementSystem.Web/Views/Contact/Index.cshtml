@@ -1,0 +1,98 @@
+﻿@model ContactViewModel
+@{
+    this.ViewData["Title"] = "Contact";
+}
+
+<section class="contact_area section_gap">
+    <div class="container">
+        <div class="mapBox" style="position: relative; bottom: 40px;">
+            <iframe width="1109" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=Sonesta%20St.%20George%20Hotel%20-%20Luxor,%20Khaled%20Ibn%20Al%20Walid,%20Gazirat%20Al%20Awameyah,%20Luxor,%20Luxor%20Governorate%201362003,%20Egypt&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="contact_info">
+                    <div class="info_item">
+                        <i class="lnr lnr-home"></i>
+                        <h6>@Model.Town, @Model.Country</h6>
+                        <p>@Model.Address</p>
+                    </div>
+                    <div class="info_item">
+                        <i class="lnr lnr-phone-handset"></i>
+                        <h6>@Model.PhoneNumber</h6>
+                        <p>From @Model.StartOfTheWorkingDay to @Model.EndOfTheWorkingDay</p>
+                    </div>
+                    <div class="info_item">
+                        <i class="lnr lnr-envelope"></i>
+                        <h6 style="word-break: break-word;">@Model.Email</h6>
+                        <p>Send us your query anytime!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <form class="row contact_form" action="javascript:void(0);" method="post" id="contactForm" onsubmit="submitForm()">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
+                        </div>
+                        <div class="form-group">
+                            @{
+                                if (this.User.Identity.IsAuthenticated)
+                                {
+                                    <input type="email" class="form-control" id="email" name="email" value="@this.User.Identity.Name">
+                                }
+                                else
+                                {
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email address">
+                                }
+                            }
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="subject" name="subject" placeholder="Enter Subject">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <textarea class="form-control" name="message" id="message" rows="1" placeholder="Enter Message"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-right">
+                        <button type="submit" value="submit" class="btn theme_btn button_hover">Send Message</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts
+{
+    <script>
+        const uri = 'api/sendemail';
+
+        function submitForm() {
+            const from = document.getElementById("name").value;
+            const fromEmail = document.getElementById("email").value;
+            const subject = document.getElementById("subject").value;
+            const message = document.getElementById("message").value;
+
+            const email = {
+                from: from,
+                fromName: fromEmail,
+                subject: subject,
+                htmlContent: message
+            };
+
+            fetch(uri, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(email)
+            })
+            .then(res => console.log("Email sended!"))
+            .catch(error => console.error('Unable to send email.', error))
+        }
+    </script>
+}

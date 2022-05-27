@@ -27,6 +27,7 @@
                           {
                               new RolesSeeder(),
                               new AboutUsInfoSeeder(),
+                              new ContactSeeder(),
                           };
 
             foreach (var seeder in seeders)

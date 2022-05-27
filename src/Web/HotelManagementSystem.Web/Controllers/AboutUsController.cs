@@ -1,9 +1,9 @@
-﻿using HotelManagementSystem.Services.Data;
-using HotelManagementSystem.Web.ViewModels;
-using Microsoft.AspNetCore.Mvc;
-
-namespace HotelManagementSystem.Web.Controllers
+﻿namespace HotelManagementSystem.Web.Controllers
 {
+    using HotelManagementSystem.Services.Data;
+    using HotelManagementSystem.Web.ViewModels.AboutUs;
+    using Microsoft.AspNetCore.Mvc;
+
     public class AboutUsController : BaseController
     {
         private readonly IAboutUsInfoService aboutUsInfoService;

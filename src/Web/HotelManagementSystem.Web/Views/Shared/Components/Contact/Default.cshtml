@@ -1,0 +1,35 @@
+﻿@using HotelManagementSystem.Web.InputModels.Contact
+@model SendEmailInputModel
+
+<form class="row contact_form" action="contact_process.php" method="post" id="contactForm">
+    <div class="col-md-6">
+        <div class="form-group">
+            <input type="text" class="form-control" asp-for="@Model.FromName" placeholder="Enter your name" />
+            <span asp-validation-for="@Model.FromName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            @{
+                if (this.User.Identity.IsAuthenticated)
+                {
+                    <input type="email" class="form-control" asp-for="@Model.From" value="@this.User.Identity.Name">
+                }
+                else
+                {
+                    <input type="email" class="form-control" asp-for="@Model.From" placeholder="Enter email address">
+                }
+            }
+            <span asp-validation-for="@Model.From" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" asp-for="@Model.Subject" placeholder="Enter Subject">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <textarea class="form-control" asp-for="@Model.HtmlContent" rows="1" placeholder="Enter Message"></textarea>
+        </div>
+    </div>
+    <div class="col-md-12 text-right">
+        <button type="submit" value="submit" class="btn theme_btn button_hover">Send Message</button>
+    </div>
+</form>

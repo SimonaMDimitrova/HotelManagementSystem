@@ -1,12 +1,15 @@
 ﻿namespace HotelManagementSystem.Services.Data
 {
-    using HotelManagementSystem.Web.InputModels;
     using System.Threading.Tasks;
+
+    using HotelManagementSystem.Web.InputModels.Area.Administration.General;
 
     public interface IAboutUsInfoService
     {
         public T Get<T>();
 
-        public Task EditAsync(AboutUsInfoInputModel input);
+        public Task EditAsync(AboutUsInfoInputModel input, string imagePath);
+
+        public string GetImageUrl();
     }
 }

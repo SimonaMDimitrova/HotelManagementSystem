@@ -1,0 +1,28 @@
+﻿@using HotelManagementSystem.Web.ViewModels.ViewComponent.Facilities
+@model FacilitiesListViewModel
+
+<section class="facilities_area section_gap">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background="">  
+    </div>
+    <div class="container">
+        <div class="section_title text-center">
+            <h2 class="title_w">Facilities</h2>
+        </div>
+
+        <div class="row mb_30">
+
+        @{
+            foreach (var facility in Model.Facilities)
+            {
+                    <div class="col-lg-4 col-md-6">
+                        <div class="facilities_item" style="height: 220px;">
+                            <h4 class="sec_h4"><i class="@facility.FavIconCode"></i>@facility.Name</h4>
+                            <p>@facility.Description</p>
+                        </div>
+                    </div>
+            }
+        }
+
+        </div>
+    </div>
+</section>

@@ -1,12 +1,13 @@
-﻿using HotelManagementSystem.Data.Common.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HotelManagementSystem.Data.Models
+﻿namespace HotelManagementSystem.Data.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    using HotelManagementSystem.Data.Common.Models;
+
     public class Facility : BaseModel<string>
     {
         public Facility()

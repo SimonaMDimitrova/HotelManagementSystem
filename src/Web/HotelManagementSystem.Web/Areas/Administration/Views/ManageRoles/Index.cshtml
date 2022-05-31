@@ -1,0 +1,90 @@
+﻿@model RolesListViewModel
+@{
+    this.ViewData["Title"] = "Manage Roles";
+}
+
+<section id="general">
+
+
+
+    <div class="content-header">
+        <h1>Manage roles</h1>
+    </div>
+
+    <div class="welcome">
+        <div class="accordion" id="accordionExample" style="text-align: center;">
+        @{
+            foreach (var role in Model.Roles)
+            {
+                <div class="card col-md-5 d-inline-block" style="padding: 0; vertical-align: top;">
+                    <div class="card-header" id="heading_@role.Id">
+                        <h5 class="mb-0">
+                        <button onclick="viewRoleUsers('heading_@role.Id')" class="btn btn-link" style="color: #f8b600;" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <strong>@role.Name</strong>
+                        </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                            @{
+                                if (!role.Users.Any())
+                                {
+                                    @:No users found.
+                                    <hr />
+                                }
+                                else
+                                {
+                                    foreach (var user in role.Users)
+                                    {
+                                        @user.Value
+                                        <form method="post" asp-area="Administration" asp-controller="ManageRoles" asp-action="Delete" asp-route-id="@user.Key" style="display: inline;">
+                                            <button id="deleteBtn" style="border: none; background: none;"><span class="badge badge-danger">Delete</span></button>
+                                        </form>
+                                        <hr />
+                                    }
+                                }
+                            }
+
+                            <form asp-area="Administration" asp-controller="ManageRoles" asp-action="Add">
+                                <div class="form-group">
+                                    <input class="form-control" id="username" type="text" name="username" />
+                                    <input class="form-control" id="role" type="hidden" name="role" value="@role.Name" />
+                                </div>
+                                <button class="genric-btn primary mx-auto d-block" style="width: 100%;" id="add-user">Add user to the group</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        </div>
+    </div>
+</section>
+<br />
+
+@section Scripts
+{
+    <script>
+        let elementToBeShowned = '';
+        function viewRoleUsers(id) {
+            let clickedHeading = document.getElementById(id);
+
+            if (elementToBeShowned != '') {
+                elementToBeShowned.classList.remove("show");
+            }
+
+            var elementToBeCollapsed = clickedHeading.nextElementSibling;
+            if (elementToBeCollapsed == elementToBeShowned) {
+                elementToBeShowned.classList.remove("show");
+                elementToBeShowned = '';
+            } else {
+                elementToBeShowned = elementToBeCollapsed;
+                elementToBeShowned.classList.add("show");
+            }
+        }
+
+        let addUserButton = document.getElementById("add-user");
+
+    </script>
+}

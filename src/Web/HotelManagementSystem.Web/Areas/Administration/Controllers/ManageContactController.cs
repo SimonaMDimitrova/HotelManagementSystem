@@ -1,9 +1,10 @@
 ﻿namespace HotelManagementSystem.Web.Areas.Administration.Controllers
 {
+    using System.Threading.Tasks;
+
     using HotelManagementSystem.Services.Data;
     using HotelManagementSystem.Web.InputModels.Area.Administration.ManageContact;
     using Microsoft.AspNetCore.Mvc;
-    using System.Threading.Tasks;
 
     public class ManageContactController : AdministrationController
     {

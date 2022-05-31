@@ -70,6 +70,7 @@
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<IAboutUsInfoService, AboutUsInfoService>();
             services.AddTransient<IContactService, ContactService>();
+            services.AddTransient<IFacilitiesService, FacilitiesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,0 +1,44 @@
+﻿@model FacilitiesListViewModel
+@{
+    ViewData["Title"] = "Manage Facilities";
+}
+
+<section id="general">
+
+    <div class="content-header">
+        <h1>Edit facilities</h1>
+    </div>
+
+    <div class="welcome col-md-10">
+        @{
+            foreach (var facility in Model.Facilities)
+            {
+                <div class="card d-inline-block" style="width: 18rem; margin-top: 10px; height: 375px; vertical-align: top;">
+
+                    <div class="card-body">
+                        <h5 class="card-title">@facility.Name</h5>
+                        <p class="card-text">@facility.Description</p>
+                    </div>
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Is available:</strong> @facility.IsAvailable</li>
+                        <li class="list-group-item"><strong>Price:</strong> @(facility.PricePerDay != 0 ? facility.PricePerDay : "Free")</li>
+                    </ul>
+
+                    <div class="card-body">
+                        <a
+                            class="genric-btn primary"
+                            asp-area="Administration"
+                            asp-controller="ManageFacilities"
+                            asp-route-id="@facility.Id"
+                            asp-action="Edit">
+                            Edit
+                        </a>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+    <br />
+</section>

@@ -5,6 +5,8 @@
     using System.Threading.Tasks;
 
     using HotelManagementSystem.Data;
+    using HotelManagementSystem.Data.Common.Repositories;
+    using HotelManagementSystem.Data.Models;
     using HotelManagementSystem.Services.Mapping;
     using HotelManagementSystem.Web.InputModels.Area.Administration.ManageContact;
 

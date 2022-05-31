@@ -28,6 +28,7 @@
                               new RolesSeeder(),
                               new AboutUsInfoSeeder(),
                               new ContactSeeder(),
+                              new FacilitiesSeeder(),
                           };
 
             foreach (var seeder in seeders)

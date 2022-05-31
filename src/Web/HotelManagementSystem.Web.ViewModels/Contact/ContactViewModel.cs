@@ -1,5 +1,7 @@
 ﻿namespace HotelManagementSystem.Web.ViewModels.Contact
 {
+    using System;
+
     using AutoMapper;
     using HotelManagementSystem.Data.Models;
     using HotelManagementSystem.Services.Mapping;

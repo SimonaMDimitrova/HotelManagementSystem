@@ -217,15 +217,12 @@ section p {
     max-width: 100%;
 }
 
+.input-radio-control {
+    position: relative;
+    top: 1px;
+    margin-right: 3px;
+}
 
-
-
-
-
-
-
-
-
-
-
-
+.input-radio-wrapper {
+    margin-right: 9px;
+}

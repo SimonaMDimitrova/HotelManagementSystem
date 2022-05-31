@@ -28,7 +28,6 @@
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> Index(AboutUsInfoInputModel input)
         {
             if (!this.ModelState.IsValid)

@@ -8,6 +8,7 @@
     using HotelManagementSystem.Data.Models;
     using HotelManagementSystem.Data.Repositories;
     using HotelManagementSystem.Data.Seeding;
+    using HotelManagementSystem.Services;
     using HotelManagementSystem.Services.Data;
     using HotelManagementSystem.Services.Mapping;
     using HotelManagementSystem.Services.Messaging;
@@ -71,6 +72,7 @@
             services.AddTransient<IAboutUsInfoService, AboutUsInfoService>();
             services.AddTransient<IContactService, ContactService>();
             services.AddTransient<IFacilitiesService, FacilitiesService>();
+            services.AddTransient<IImagesService, ImagesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

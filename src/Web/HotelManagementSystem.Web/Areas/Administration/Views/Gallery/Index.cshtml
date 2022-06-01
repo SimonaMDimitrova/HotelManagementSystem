@@ -1,19 +1,32 @@
-﻿@{
+﻿@model string[]
+@{
     this.ViewData["Title"] = "Gallery";
 }
 
 <section id="general">
 
     <div class="content-header">
-        <h1>Edit general information</h1>
+        <h1>Edit gallery photos</h1>
     </div>
 
     <div class="welcome text-left">
-        <button class="genric-btn primary">Add new photo</button>
+        <a class="genric-btn primary" asp-area="Administration" asp-controller="Gallery" asp-action="Add">Add new photo</a>
 
         <hr />
+        @{
+            foreach (var image in Model)
+            {
+                <div style="width: 211px; height: 211px; overflow: hidden; display: inline-block; margin: 4.85px; position: relative;">
+                    <form method="post" asp-area="Administration" asp-controller="Gallery" asp-action="Delete" asp-route-id="@image" style="position: absolute; right: 0;">
+                        <button id="deleteBtn" style="border: none; background: none;"><span class="badge badge-danger">x</span></button>
+                    </form>
+
+                    <img src="/general/image/gallery/@image" alt="@image" class="img-thumbnail" style="object-fit: cover; width: 211px; height: 211px;">
+                </div>
+            }
+        }
         <hr />
 
-        <button class="genric-btn primary">Add new photo</button>
+        <a class="genric-btn primary" asp-area="Administration" asp-controller="Gallery" asp-action="Add">Add new photo</a>
     </div>
 </section>

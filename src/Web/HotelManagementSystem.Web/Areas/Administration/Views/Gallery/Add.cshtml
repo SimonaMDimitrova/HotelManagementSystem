@@ -1,0 +1,25 @@
+﻿@model GalleryImagesInputModel
+@{
+this.ViewData["Title"] = "General";
+}
+
+<section id="general">
+
+    <div class="content-header">
+        <h1>Add new gallery images</h1>
+    </div>
+
+    <div class="welcome col-md-6">
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group row">
+                <label asp-for="Images"></label>
+                <input asp-for="Images" class="form-control" />
+            </div>
+
+            <div class="justify-content-center">
+                <button class="genric-btn primary mx-auto d-block">Add images</button>
+            </div>
+        </form>
+    </div>
+</section>
+<br />

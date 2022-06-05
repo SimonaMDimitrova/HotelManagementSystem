@@ -1,4 +1,4 @@
-﻿namespace HotelManagementSystem.Web.ViewModels.ViewComponent.Facilities
+﻿namespace HotelManagementSystem.Web.ViewModels.ViewComponents.Facilities
 {
     using HotelManagementSystem.Data.Models;
     using HotelManagementSystem.Services.Mapping;

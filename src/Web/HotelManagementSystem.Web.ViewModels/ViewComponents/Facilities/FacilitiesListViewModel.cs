@@ -1,4 +1,4 @@
-﻿namespace HotelManagementSystem.Web.ViewModels.ViewComponent.Facilities
+﻿namespace HotelManagementSystem.Web.ViewModels.ViewComponents.Facilities
 {
     using System.Collections.Generic;
 

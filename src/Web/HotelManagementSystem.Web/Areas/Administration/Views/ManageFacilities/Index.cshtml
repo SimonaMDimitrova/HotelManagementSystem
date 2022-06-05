@@ -13,11 +13,11 @@
         @{
             foreach (var facility in Model.Facilities)
             {
-                <div class="card d-inline-block" style="width: 18rem; margin-top: 10px; height: 375px; vertical-align: top;">
+                <div class="card d-inline-block" style="width: 18rem; margin-top: 10px; height: 365px; vertical-align: top;">
 
                     <div class="card-body">
                         <h5 class="card-title">@facility.Name</h5>
-                        <p class="card-text">@facility.Description</p>
+                        <p class="card-text" style="height: 100px; overflow: auto;">@facility.Description</p>
                     </div>
 
                     <ul class="list-group list-group-flush">

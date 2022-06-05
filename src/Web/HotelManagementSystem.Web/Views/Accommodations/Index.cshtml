@@ -1,0 +1,31 @@
+﻿@model AccommodationsListViewModel
+@{
+    this.ViewData["Title"] = "Accommodations";
+}
+
+<section class="accomodation_area section_gap">
+    <div class="container">
+        <div class="section_title text-center">
+            <h2 class="title_color">Accomodations</h2>
+            <p>We all live in an age that belongs to the young at heart. Life that is becoming extremely fast,</p>
+        </div>
+        <div class="row mb_30">
+            @{
+                foreach (var accommodation in Model.Accommodations)
+                {
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="accomodation_item text-center">
+                            <div class="hotel_img" style="height: 270px;">
+                                <img src="/general/image/rooms/@accommodation.ImageName" alt="@accommodation.Name" style="object-fit: cover;width: 270px;height: 270px;">
+                            </div>
+                            <a href="#"><h4 class="sec_h4">@accommodation.Name</h4></a>
+                            <h5>$@accommodation.PricePerNight<small>/night</small></h5>
+                            <h6>@accommodation.GuestsCount guest(s)</h6>
+                        </div>
+                    </div>
+                }
+            }
+            
+        </div>
+    </div>
+</section>

@@ -1,0 +1,46 @@
+﻿@model BedTypesListViewModel
+@{
+    this.ViewData["Title"] = "Manage bed prices";
+}
+
+<section id="general">
+
+    <div class="content-header">
+        <h1>Edit facilities</h1>
+    </div>
+
+    <div class="welcome col-md-10">
+        @{
+            foreach (var accommodation in Model.Accommodations)
+            {
+                <div class="card d-inline-block" style="width: 18rem; margin-top: 10px; height: 562px; vertical-align: top;">
+
+                    <div class="card-body">
+                        <h5 class="card-title">@accommodation.Name</h5>
+                        <img src="/general/image/rooms/@accommodation.ImageName" alt="@accommodation.Name" style="width: 100%; height: 150px; object-fit: cover;" />
+                        <p class="card-text" style="height: 100px; overflow: auto;">@accommodation.Description</p>
+                    </div>
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Count:</strong> @accommodation.Count</li>
+                        <li class="list-group-item"><strong>Guests:</strong> @accommodation.GuestsCount</li>
+                        <li class="list-group-item"><strong>Additional price:</strong> @accommodation.AddictionalPrice</li>
+                    </ul>
+
+                    <div class="card-body">
+                        <a
+                            class="genric-btn primary"
+                            asp-area="Administration"
+                            asp-controller="ManageAccommodations"
+                            asp-route-id="@accommodation.Id"
+                            asp-action="Edit">
+                            Edit
+                        </a>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+    <br />
+</section>

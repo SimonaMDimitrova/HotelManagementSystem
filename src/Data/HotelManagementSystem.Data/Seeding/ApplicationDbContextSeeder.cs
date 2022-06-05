@@ -29,6 +29,8 @@
                               new AboutUsInfoSeeder(),
                               new ContactSeeder(),
                               new FacilitiesSeeder(),
+                              new BedTypesSeeder(),
+                              new AccommodationSeeder(),
                           };
 
             foreach (var seeder in seeders)

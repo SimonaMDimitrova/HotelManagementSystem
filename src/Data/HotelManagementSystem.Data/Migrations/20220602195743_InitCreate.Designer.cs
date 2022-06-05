@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelManagementSystem.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220526180425_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20220602195743_InitCreate")]
+    partial class InitCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,6 +49,63 @@ namespace HotelManagementSystem.Data.Migrations
                     b.HasIndex("ImageId");
 
                     b.ToTable("AboutUsPageInfo");
+                });
+
+            modelBuilder.Entity("HotelManagementSystem.Data.Models.Accommodation", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<double>("AdditionalPrice")
+                        .HasColumnType("float");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Accommodations");
+                });
+
+            modelBuilder.Entity("HotelManagementSystem.Data.Models.AccommodationBedType", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AccommodationId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("BedTypeId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccommodationId");
+
+                    b.HasIndex("BedTypeId");
+
+                    b.ToTable("AccommodationBedTypes");
                 });
 
             modelBuilder.Entity("HotelManagementSystem.Data.Models.ApplicationRole", b =>
@@ -171,6 +228,86 @@ namespace HotelManagementSystem.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("HotelManagementSystem.Data.Models.BedType", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Capacity")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BedTypes");
+                });
+
+            modelBuilder.Entity("HotelManagementSystem.Data.Models.Booking", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AccommodationId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CheckIn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("CheckInActual")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CheckOut")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("CheckOutActual")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsCreditCard")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPaid")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccommodationId");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Bookings");
+                });
+
             modelBuilder.Entity("HotelManagementSystem.Data.Models.Contact", b =>
                 {
                     b.Property<string>("Id")
@@ -179,20 +316,17 @@ namespace HotelManagementSystem.Data.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("DeletedOn")
+                    b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("GoogleMapsAddress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                    b.Property<TimeSpan>("EndOfTheWorkingDay")
+                        .HasColumnType("time");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
@@ -200,11 +334,81 @@ namespace HotelManagementSystem.Data.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<TimeSpan>("StartOfTheWorkingDay")
+                        .HasColumnType("time");
+
+                    b.Property<string>("Town")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
+
+                    b.ToTable("Contact");
+                });
+
+            modelBuilder.Entity("HotelManagementSystem.Data.Models.Facility", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FavIconCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("PricePerDay")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Facilities");
+                });
+
+            modelBuilder.Entity("HotelManagementSystem.Data.Models.Feedback", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Rate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("Contact");
+                    b.ToTable("Feedbacks");
                 });
 
             modelBuilder.Entity("HotelManagementSystem.Data.Models.Image", b =>
@@ -349,6 +553,45 @@ namespace HotelManagementSystem.Data.Migrations
                     b.Navigation("Image");
                 });
 
+            modelBuilder.Entity("HotelManagementSystem.Data.Models.AccommodationBedType", b =>
+                {
+                    b.HasOne("HotelManagementSystem.Data.Models.Accommodation", "Accommodation")
+                        .WithMany("AccommodationBedTypes")
+                        .HasForeignKey("AccommodationId");
+
+                    b.HasOne("HotelManagementSystem.Data.Models.BedType", "BedType")
+                        .WithMany("AccommodationBedTypes")
+                        .HasForeignKey("BedTypeId");
+
+                    b.Navigation("Accommodation");
+
+                    b.Navigation("BedType");
+                });
+
+            modelBuilder.Entity("HotelManagementSystem.Data.Models.Booking", b =>
+                {
+                    b.HasOne("HotelManagementSystem.Data.Models.Accommodation", "Accommodation")
+                        .WithMany()
+                        .HasForeignKey("AccommodationId");
+
+                    b.HasOne("HotelManagementSystem.Data.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.Navigation("Accommodation");
+
+                    b.Navigation("ApplicationUser");
+                });
+
+            modelBuilder.Entity("HotelManagementSystem.Data.Models.Feedback", b =>
+                {
+                    b.HasOne("HotelManagementSystem.Data.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.Navigation("ApplicationUser");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("HotelManagementSystem.Data.Models.ApplicationRole", null)
@@ -400,6 +643,11 @@ namespace HotelManagementSystem.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("HotelManagementSystem.Data.Models.Accommodation", b =>
+                {
+                    b.Navigation("AccommodationBedTypes");
+                });
+
             modelBuilder.Entity("HotelManagementSystem.Data.Models.ApplicationUser", b =>
                 {
                     b.Navigation("Claims");
@@ -407,6 +655,11 @@ namespace HotelManagementSystem.Data.Migrations
                     b.Navigation("Logins");
 
                     b.Navigation("Roles");
+                });
+
+            modelBuilder.Entity("HotelManagementSystem.Data.Models.BedType", b =>
+                {
+                    b.Navigation("AccommodationBedTypes");
                 });
 #pragma warning restore 612, 618
         }

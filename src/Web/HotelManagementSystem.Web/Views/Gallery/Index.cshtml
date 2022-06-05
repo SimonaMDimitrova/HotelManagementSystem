@@ -12,14 +12,23 @@
 
         <div class="row imageGallery1" id="gallery">
 
-        @foreach (var image in Model)
-        {
-                <div class="col-md-4 gallery_item">
-                    <div class="gallery_img" style="width: 320px; height: 320px;">
-                        <img src="/general/image/gallery/@image" alt="" style="width: 320px; height: 320px; object-fit: cover;">
-                    </div>
-                </div>
-        }
+            @{
+                if (!Model.Any())
+                {
+                    <p>No photos found.</p>
+                }
+                else
+                {
+                    @foreach (var image in Model)
+                    {
+                        <div class="col-md-4 gallery_item">
+                            <div class="gallery_img" style="width: 320px; height: 320px;">
+                                <img src="/general/image/gallery/@image" alt="" style="width: 320px; height: 320px; object-fit: cover;">
+                            </div>
+                        </div>
+                    }
+                }
+            }
 
         </div>
     </div>

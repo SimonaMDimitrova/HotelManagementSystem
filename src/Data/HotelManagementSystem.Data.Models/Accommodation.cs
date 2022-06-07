@@ -11,6 +11,7 @@
         {
             this.Id = Guid.NewGuid().ToString();
             this.AccommodationBedTypes = new HashSet<AccommodationBedType>();
+            this.Bookings = new HashSet<Booking>();
         }
 
         public string Name { get; set; }
@@ -23,6 +24,8 @@
 
         public string ImageName { get; set; }
 
-        public ICollection<AccommodationBedType> AccommodationBedTypes { get; set; }
+        public virtual ICollection<AccommodationBedType> AccommodationBedTypes { get; set; }
+
+        public virtual ICollection<Booking> Bookings { get; set; }
     }
 }

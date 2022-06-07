@@ -4,6 +4,8 @@
     using System.Threading.Tasks;
 
     using HotelManagementSystem.Web.InputModels.Area.Administration.ManageAccommodations;
+    using HotelManagementSystem.Web.InputModels.Area.Administration.ManageBookings;
+    using HotelManagementSystem.Web.ViewModels.Area.Administration.ManageBookings;
 
     public interface IAccommodationsService
     {
@@ -14,5 +16,7 @@
         public Task EditAsync(AccommodationInputModel input);
 
         public string GetName(string id);
+
+        public IEnumerable<T> GetAvailable<T>(AccommodationSearchInputModel<T> input);
     }
 }

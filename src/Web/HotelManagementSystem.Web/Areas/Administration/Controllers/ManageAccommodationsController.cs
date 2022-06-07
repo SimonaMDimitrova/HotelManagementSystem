@@ -1,11 +1,12 @@
 ﻿namespace HotelManagementSystem.Web.Areas.Administration.Controllers
 {
+    using System;
+    using System.Threading.Tasks;
+
     using HotelManagementSystem.Services.Data;
     using HotelManagementSystem.Web.InputModels.Area.Administration.ManageAccommodations;
     using HotelManagementSystem.Web.ViewModels.Area.Administration.ManageAccommodations;
     using Microsoft.AspNetCore.Mvc;
-    using System;
-    using System.Threading.Tasks;
 
     public class ManageAccommodationsController : AdministrationController
     {

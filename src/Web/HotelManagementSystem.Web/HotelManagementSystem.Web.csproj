@@ -50,6 +50,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Update="wwwroot\general\image\about-us\21dc237b-eb17-4591-a868-a4b28c1f189a.jpg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>

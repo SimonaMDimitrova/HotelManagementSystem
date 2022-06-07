@@ -17,8 +17,8 @@
 
         public IActionResult Index()
         {
-            var model = this.contactService.Get<ContactInputModel>();
-            return this.View(model);
+            var viewModel = this.contactService.Get<ContactInputModel>();
+            return this.View(viewModel);
         }
 
         [HttpPost]

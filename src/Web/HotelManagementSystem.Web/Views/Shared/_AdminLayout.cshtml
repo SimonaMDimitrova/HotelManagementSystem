@@ -37,15 +37,20 @@
 			</a>
 		</div>
 		<nav class="left-nav">
-			<ul id="nav">
-				<li class="current"><a href="#welcome">General</a></li>
-				<li><a href="#installation">Manage contact</a></li>
-				<li><a href="#installation">Manage roles</a></li>
-				<li><a href="#tmpl-structure">Manual reservation</a></li>
-				<li><a href="#css-structure">Check-in/out</a></li>
-				<li><a href="#javascript">Manage rooms</a></li>
-				<li><a href="#contact-form">Vouchering system</a></li>
-				<li><a href="#subscription-form">Reports</a></li>
+			<ul id="nav-bar">
+				@if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+				{
+					<li><a asp-area="Administration" asp-controller="General" asp-action="">General</a></li>
+					<li><a asp-area="Administration" asp-controller="ManageContact" asp-action="">Manage contact</a></li>
+					<li><a asp-area="Administration" asp-controller="ManageRoles" asp-action="">Manage roles</a></li>
+					<li><a asp-area="Administration" asp-controller="ManageAccommodations" asp-action="">Manage accommodations</a></li>
+					<li><a asp-area="Administration" asp-controller="ManageBeds" asp-action="">Manage beds</a></li>
+					<li><a asp-area="Administration" asp-controller="ManageFacilities" asp-action="">Manage facilities</a></li>
+				}
+				
+				<li><a asp-area="Administration" asp-controller="ManageBookings" asp-action="">Manage bookings</a></li>
+				<li><a asp-area="Administration" asp-controller="CheckInOut" asp-action="">Check-in/out</a></li>
+				<li><a asp-area="Administration" asp-controller="Gallery" asp-action="">Gallery</a></li>
 			</ul>
 		</nav>
 	</aside>
@@ -66,8 +71,14 @@
 	<script type="text/javascript" src="~/administration/syntax-highlighter/scripts/shBrushCss.js" asp-append-version="true"></script>
 	<script type="text/javascript" src="~/administration/syntax-highlighter/scripts/shBrushJScript.js" asp-append-version="true"></script>
 	<script type="text/javascript" src="~/administration/syntax-highlighter/scripts/shBrushPhp.js" asp-append-version="true"></script>
-	<script type="text/javascript">
-	    SyntaxHighlighter.all()
+	<script>
+		let listElements = document.getElementById("nav-bar").getElementsByTagName("li");
+		let listToArray = Array.from(listElements);
+		let url = window.location.href.toLowerCase();
+
+		let listElement = listToArray.filter(x => url.includes(x.innerText.replaceAll(' ','').toLowerCase()))[0];
+
+		listElement.classList.add("current");
 	</script>
 	<script type="text/javascript" src="js/custom.js"></script>
     @await this.RenderSectionAsync("Scripts", required: false)

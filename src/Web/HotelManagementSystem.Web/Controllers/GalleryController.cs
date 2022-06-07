@@ -19,6 +19,8 @@
 
         public IActionResult Index()
         {
+            this.ViewData["IsUserOnHomePage"] = false;
+
             var viewModel = this.imagesService.GetAll($"{this.environment.WebRootPath}/general/image/gallery");
             return this.View(viewModel);
         }

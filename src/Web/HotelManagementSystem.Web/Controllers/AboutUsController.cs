@@ -15,6 +15,8 @@
 
         public IActionResult Index()
         {
+            this.ViewData["IsUserOnHomePage"] = false;
+
             var model = this.aboutUsInfoService.Get<AboutUsInfoViewModel>();
 
             return this.View(model);

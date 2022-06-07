@@ -9,6 +9,8 @@
     using HotelManagementSystem.Data;
     using HotelManagementSystem.Services.Mapping;
     using HotelManagementSystem.Web.InputModels.Area.Administration.ManageAccommodations;
+    using HotelManagementSystem.Web.InputModels.Area.Administration.ManageBookings;
+    using HotelManagementSystem.Web.ViewModels.Area.Administration.ManageBookings;
 
     public class AccommodationsService : IAccommodationsService
     {
@@ -66,5 +68,32 @@
 
             return accommodationName.Name;
         }
+
+        public IEnumerable<T> GetAvailable<T>(AccommodationSearchInputModel<T> input)
+        {
+            if (input.CheckIn < DateTime.UtcNow || input.CheckOut <= input.CheckIn)
+            {
+                return null;
+            }
+
+            var availableAccommodations = this.dbContext
+                .Accommodations
+                .Where(x =>
+                    x.AccommodationBedTypes.Sum(a => a.BedType.Capacity) == input.GuestsCount
+                    && (!x.Bookings.Any()))
+                .OrderBy(x => x.AdditionalPrice)
+                .To<T>()
+                .ToList();
+
+            if (!availableAccommodations.Any())
+            {
+                return null;
+            }
+
+            return availableAccommodations;
+        }
     }
 }
+
+
+//|| x.Bookings.Where(b => b.CheckOut.AddDays(1) <= input.CheckIn && b.CheckIn.AddDays(-1) > input.CheckOut).Any())

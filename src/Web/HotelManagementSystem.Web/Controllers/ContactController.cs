@@ -21,9 +21,11 @@
 
         public IActionResult Index()
         {
-            var model = this.contactService.Get<ContactViewModel>();
+            this.ViewData["IsUserOnHomePage"] = false;
 
-            return this.View(model);
+            var viewModel = this.contactService.Get<ContactViewModel>();
+
+            return this.View(viewModel);
         }
     }
 }

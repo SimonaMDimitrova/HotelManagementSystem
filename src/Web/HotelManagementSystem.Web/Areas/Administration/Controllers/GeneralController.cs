@@ -2,6 +2,7 @@
 {
     using System.Threading.Tasks;
 
+    using HotelManagementSystem.Common;
     using HotelManagementSystem.Services.Data;
     using HotelManagementSystem.Web.InputModels.Area.Administration.General;
     using Microsoft.AspNetCore.Authorization;
@@ -23,8 +24,8 @@
 
         public IActionResult Index()
         {
-            var model = this.aboutUsInfoService.Get<AboutUsInfoInputModel>();
-            return this.View(model);
+            var viewModel = this.aboutUsInfoService.Get<AboutUsInfoInputModel>();
+            return this.View(viewModel);
         }
 
         [HttpPost]

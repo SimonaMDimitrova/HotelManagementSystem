@@ -9,7 +9,7 @@
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
 
-    public class GalleryController : AdministrationController
+    public class GalleryController : ReceptionistController
     {
         private readonly IImagesService imagesService;
         private readonly IWebHostEnvironment environment;

@@ -39,7 +39,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelManagementSystem.Web.T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelManagementSystem.Web.ViewModels", "Web\HotelManagementSystem.Web.ViewModels\HotelManagementSystem.Web.ViewModels.csproj", "{13B7AACB-9C85-4409-8D4B-95A67D0DFFF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelManagementSystem.Web.InputModels", "Web\HotelManagementSystem.Web.InputModels\HotelManagementSystem.Web.InputModels.csproj", "{B48F362C-B874-4047-9152-9A54A6429C9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelManagementSystem.Web.InputModels", "Web\HotelManagementSystem.Web.InputModels\HotelManagementSystem.Web.InputModels.csproj", "{B48F362C-B874-4047-9152-9A54A6429C9A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D9BCEE45-E81C-4FBC-BA3B-B43CB0CB1053}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

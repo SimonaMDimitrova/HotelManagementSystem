@@ -30,20 +30,20 @@
                 </div>
             </div>
             <div class="col-md-9">
-                <form class="row contact_form" action="javascript:void(0);" method="post" id="contactForm" onsubmit="submitForm()">
+                <form class="row contact_form" action="javascript:void(0);" method="post" id="contactForm">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
+                            <input type="text" class="form-control" id="fromName" name="fromName" placeholder="Enter your name">
                         </div>
                         <div class="form-group">
                             @{
                                 if (this.User.Identity.IsAuthenticated)
                                 {
-                                    <input type="email" class="form-control" id="email" name="email" value="@this.User.Identity.Name">
+                                    <input type="email" class="form-control" id="from" name="from" value="@this.User.Identity.Name">
                                 }
                                 else
                                 {
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email address">
+                                    <input type="email" class="form-control" id="from" name="from" placeholder="Enter email address">
                                 }
                             }
                         </div>
@@ -68,31 +68,18 @@
 @section Scripts
 {
     <script>
-        const uri = 'api/sendemail';
+        let contactForm = document.getElementById("contactForm");
+        contactForm.addEventListener("submit", (e) => {
+            const data = Object.fromEntries(new FormData(e.target).entries());
+            console.log(e.target)
+            emailjs.send('service_96allcn', 'template_mb11fr8', data, "NkrK2L9jgcu6lSu_q")
+                .then(function() {
+                    console.log('SUCCESS!');
+                }, function(error) {
+                    console.log('FAILED...', error);
+                });
 
-        function submitForm() {
-            const from = document.getElementById("name").value;
-            const fromEmail = document.getElementById("email").value;
-            const subject = document.getElementById("subject").value;
-            const message = document.getElementById("message").value;
-
-            const email = {
-                from: from,
-                fromName: fromEmail,
-                subject: subject,
-                htmlContent: message
-            };
-
-            fetch(uri, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(email)
-            })
-            .then(res => console.log("Email sended!"))
-            .catch(error => console.error('Unable to send email.', error))
-        }
+            e.target.reset();
+        });
     </script>
 }

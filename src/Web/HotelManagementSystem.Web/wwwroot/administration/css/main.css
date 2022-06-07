@@ -16,7 +16,7 @@ a {
 }
 
 a, a:hover, a:focus{
-	text-decoration: none;
+	text-decoration: none!important;
 	outline: 0;
 }
 h1, h2, h3,
@@ -225,4 +225,8 @@ section p {
 
 .input-radio-wrapper {
     margin-right: 9px;
+}
+
+.current {
+    background: #f8b600;
 }

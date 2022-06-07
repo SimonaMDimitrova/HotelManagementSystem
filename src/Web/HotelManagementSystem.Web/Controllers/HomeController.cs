@@ -10,11 +10,8 @@
     {
         public IActionResult Index()
         {
-            return this.View();
-        }
+            this.ViewData["IsUserOnHomePage"] = true;
 
-        public IActionResult Privacy()
-        {
             return this.View();
         }
 

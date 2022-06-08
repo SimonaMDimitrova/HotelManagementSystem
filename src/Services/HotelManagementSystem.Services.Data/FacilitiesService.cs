@@ -23,6 +23,7 @@
         {
             var facilities = this.dbContext
                 .Facilities
+                .OrderBy(x => x.PricePerDay)
                 .To<T>()
                 .ToList();
 

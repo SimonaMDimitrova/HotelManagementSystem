@@ -1,7 +1,8 @@
 ﻿namespace HotelManagementSystem.Web.Areas.Administration.Controllers
 {
     using System;
-
+    using System.Linq;
+    using System.Threading.Tasks;
     using HotelManagementSystem.Services.Data;
     using HotelManagementSystem.Web.InputModels.Area.Administration.ManageBookings;
     using HotelManagementSystem.Web.ViewModels.Area.Administration.ManageBookings;
@@ -10,10 +11,20 @@
     public class ManageBookingsController : ReceptionistController
     {
         private readonly IAccommodationsService accommodationsService;
+        private readonly IBedTypesService bedTypesService;
+        private readonly IFacilitiesService facilitiesService;
+        private readonly IBookingsService bookingsService;
 
-        public ManageBookingsController(IAccommodationsService accommodationsService)
+        public ManageBookingsController(
+            IAccommodationsService accommodationsService,
+            IBedTypesService bedTypesService,
+            IFacilitiesService facilitiesService,
+            IBookingsService bookingsService)
         {
             this.accommodationsService = accommodationsService;
+            this.bedTypesService = bedTypesService;
+            this.facilitiesService = facilitiesService;
+            this.bookingsService = bookingsService;
         }
 
         public IActionResult Index(AccommodationSearchInputModel<AccommodationViewModel> input)
@@ -32,14 +43,44 @@
         {
             var viewModel = new BookingInputModel
             {
-                Id = id,
+                AccommodationId = id,
                 CheckIn = checkIn,
                 CheckOut = checkOut,
                 GuestsCount = guestsCount,
                 Price = price,
+                Days = (checkOut.Date - checkIn.Date).Days,
             };
 
+            var facilities = this.facilitiesService.GetAll<FacilityInputModel>();
+            var bedTypes = this.bedTypesService.GetAll<BedTypeInputModel>();
+
+            viewModel.Facilities = facilities;
+            viewModel.BedTypes = bedTypes;
+
             return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(BookingInputModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                var facilities = this.facilitiesService.GetAll<FacilityInputModel>();
+                var bedTypes = this.bedTypesService.GetAll<BedTypeInputModel>();
+
+
+                input.Facilities = facilities;
+                input.BedTypes = bedTypes;
+                input.Days = (input.CheckOut - input.CheckIn).Days;
+
+                input.Price += (double)facilities.Where(x => input.FacilitiesIds.Contains(x.Id)).Sum(x => x.PricePerDay * input.Days);
+
+                return this.View(input);
+            }
+
+            await this.bookingsService.AddAsync(input);
+
+            return this.RedirectToAction(nameof(this.Index));
         }
     }
 }

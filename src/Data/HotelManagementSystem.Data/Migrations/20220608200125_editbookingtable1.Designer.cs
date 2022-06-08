@@ -4,6 +4,7 @@ using HotelManagementSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelManagementSystem.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220608200125_editbookingtable1")]
+    partial class editbookingtable1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -283,6 +285,9 @@ namespace HotelManagementSystem.Data.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsConfirmed")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -304,40 +309,6 @@ namespace HotelManagementSystem.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("Bookings");
-                });
-
-            modelBuilder.Entity("HotelManagementSystem.Data.Models.BookingFacility", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("BookingId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FacilityId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BookingId");
-
-                    b.HasIndex("FacilityId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.ToTable("BookingFacilities");
                 });
 
             modelBuilder.Entity("HotelManagementSystem.Data.Models.Contact", b =>
@@ -615,21 +586,6 @@ namespace HotelManagementSystem.Data.Migrations
                     b.Navigation("ApplicationUser");
                 });
 
-            modelBuilder.Entity("HotelManagementSystem.Data.Models.BookingFacility", b =>
-                {
-                    b.HasOne("HotelManagementSystem.Data.Models.Booking", "Booking")
-                        .WithMany("BookingFacilities")
-                        .HasForeignKey("BookingId");
-
-                    b.HasOne("HotelManagementSystem.Data.Models.Facility", "Facility")
-                        .WithMany("BookingFacilities")
-                        .HasForeignKey("FacilityId");
-
-                    b.Navigation("Booking");
-
-                    b.Navigation("Facility");
-                });
-
             modelBuilder.Entity("HotelManagementSystem.Data.Models.Feedback", b =>
                 {
                     b.HasOne("HotelManagementSystem.Data.Models.ApplicationUser", "ApplicationUser")
@@ -711,16 +667,6 @@ namespace HotelManagementSystem.Data.Migrations
             modelBuilder.Entity("HotelManagementSystem.Data.Models.BedType", b =>
                 {
                     b.Navigation("AccommodationBedTypes");
-                });
-
-            modelBuilder.Entity("HotelManagementSystem.Data.Models.Booking", b =>
-                {
-                    b.Navigation("BookingFacilities");
-                });
-
-            modelBuilder.Entity("HotelManagementSystem.Data.Models.Facility", b =>
-                {
-                    b.Navigation("BookingFacilities");
                 });
 #pragma warning restore 612, 618
         }

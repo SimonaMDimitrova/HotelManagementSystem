@@ -42,6 +42,8 @@
 
         public DbSet<AccommodationBedType> AccommodationBedTypes { get; set; }
 
+        public DbSet<BookingFacility> BookingFacilities { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

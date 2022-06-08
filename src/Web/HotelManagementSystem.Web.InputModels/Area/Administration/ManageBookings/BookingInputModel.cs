@@ -4,7 +4,7 @@
 
     public class BookingInputModel
     {
-        public string Id { get; set; }
+        public string AccommodationId { get; set; }
 
         [Required]
         [MinLength(3)]
@@ -28,5 +28,13 @@
         public double Price { get; set; }
 
         public int GuestsCount { get; set; }
+
+        public int Days { get; set; }
+
+        public IEnumerable<BedTypeInputModel>? BedTypes { get; set; }
+
+        public IEnumerable<string> FacilitiesIds { get; set; }
+
+        public IEnumerable<FacilityInputModel>? Facilities { get; set; }
     }
 }

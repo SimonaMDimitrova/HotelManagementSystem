@@ -18,10 +18,6 @@
 
         public DateTime CheckOut { get; set; }
 
-        public DateTime? CheckInActual { get; set; }
-
-        public DateTime? CheckOutActual { get; set; }
-
         public string FirstName { get; set; }
 
         public string LastName { get; set; }

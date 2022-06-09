@@ -1,0 +1,31 @@
+﻿@model EditBookingViewModel
+@{
+    this.ViewData["Title"] = "Edit booking";
+}
+
+<section id="general">
+
+    <div class="content-header">
+        <h1>Edit booking</h1>
+    </div>
+    <div class="welcome col-md-6">
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group row">
+                <label asp-for="CheckIn"></label>
+                <input asp-for="CheckIn" class="form-control" />
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="CheckOut"></label>
+                <input asp-for="CheckOut" class="form-control" />
+                <span asp-validation-for="CheckIn" class="text-danger"></span>
+            </div>
+
+            <input asp-for="Id" type="hidden" />
+            
+            <div style="text-align: center;">
+                <input type="submit" class="genric-btn primary" value="Edit" />
+            </div>
+        </form>
+    </div>
+</section>

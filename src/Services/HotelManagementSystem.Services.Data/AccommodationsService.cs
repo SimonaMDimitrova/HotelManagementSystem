@@ -80,7 +80,7 @@
                 .Accommodations
                 .Where(x =>
                     x.AccommodationBedTypes.Sum(a => a.BedType.Capacity) == input.GuestsCount
-                    && (!x.Bookings.Any()))
+                    && (!x.Bookings.Any() || x.Bookings.Where(b => b.CheckOut.AddDays(1) <= input.CheckIn || b.CheckIn > input.CheckOut).Any()))
                 .OrderBy(x => x.AdditionalPrice)
                 .To<T>()
                 .ToList();
@@ -94,6 +94,3 @@
         }
     }
 }
-
-
-//|| x.Bookings.Where(b => b.CheckOut.AddDays(1) <= input.CheckIn && b.CheckIn.AddDays(-1) > input.CheckOut).Any())

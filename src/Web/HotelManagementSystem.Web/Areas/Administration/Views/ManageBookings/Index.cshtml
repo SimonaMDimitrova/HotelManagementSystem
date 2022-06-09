@@ -1,6 +1,8 @@
-﻿@model AccommodationSearchInputModel<HotelManagementSystem.Web.ViewModels.Area.Administration.ManageBookings.AccommodationViewModel>
+﻿@using HotelManagementSystem.Web.ViewModels.Area.Administration.ManageBookings
+@model BookingsListViewModel
 @{
-    this.ViewData["Title"] = "Search available bookings";
+    this.ViewData["Title"] = "All bookings";
+    var bookingCount = 0;
 }
 
 <section id="general">
@@ -9,73 +11,87 @@
         <h1>@ViewData["Title"]</h1>
     </div>
 
-    <div class="welcome col-md-6">
-        <form method="get">
-            <div class="form-group row">
-                <label asp-for="CheckIn"></label>
-                <input asp-for="CheckIn" class="form-control" />
-                <span asp-validation-for="CheckIn" class="text-danger"></span>
-            </div>
+    <div class="welcome col-md-12">
+        <a asp-area="Administration" asp-controller="ManageBookings" asp-action="Search" class="genric-btn primary">Add</a>
 
-            <div class="form-group row">
-                <label asp-for="CheckOut"></label>
-                <input asp-for="CheckOut" class="form-control" />
-                <span asp-validation-for="CheckOut" class="text-danger"></span>
-            </div>
+        @if (Model.Bookings != null && Model.Bookings.Count() > 0)
+        {
 
-            <div class="form-group row">
-                <label asp-for="GuestsCount"></label>
-                <input asp-for="GuestsCount" class="form-control" />
-                <span asp-validation-for="GuestsCount" class="text-danger"></span>
-            </div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr style="text-align: center;">
+                        <th scope="col">#</th>
+                        <th scope="col">User</th>
+                        <th scope="col">Accommodation</th>
+                        <th scope="col">Booking information</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-            <div class="justify-content-center">
-                <button class="genric-btn primary mx-auto d-block">Search</button>
-            </div>
-        </form>
+                    @foreach (var booking in Model.Bookings)
+                    {
+                        bookingCount++;
+
+                        <tr>
+                            <th scope="row">@bookingCount</th>
+                            <td>
+                                <strong>Name:</strong> @booking.Username
+                                <br />
+                                <strong>Phone:</strong> @booking.PhoneNumber
+                                <br />
+                                @if (!string.IsNullOrWhiteSpace(booking.Email))
+                                {
+                                    <strong>Email: </strong>@booking.Email
+                                    <br />
+                                }
+                                <strong>Accommodation booked online: </strong>@(booking.ISBookedOnline ? "Yes" : "No")
+                            </td>
+                            <td>
+                                <strong>Accommodation:</strong> @booking.AccommodationName
+                                <br />
+                                <strong>Bed types:</strong>
+                                <ul>
+                                    @foreach (var bedType in booking.BedTypes)
+                                    {
+                                        <li>@bedType</li>
+                                    }
+                                </ul>
+                            </td>
+
+                            <td>
+                                <strong>@booking.CheckIn</strong> - <strong>@booking.CheckOut</strong> 
+                                <br />
+                                <strong>Guests:</strong> @booking.GuestsCount
+                                <br />
+                                <strong>Price:</strong> $@booking.Price
+                                <br />
+                                <strong>Facilities included:</strong>
+                                <ul>
+                                    @foreach (var facility in booking.Facilities)
+                                    {
+                                        <li>@facility</li>
+                                    }
+                                </ul>
+                            </td>
+                            <td>
+                                <a asp-area="Administration" asp-controller="ManageBookings" asp-action="Edit" asp-route-id="@booking.Id" class="genric-btn primary">Edit</a>
+                                <form method="post" asp-area="Administration" asp-controller="ManageBookings" asp-action="Cancel" asp-route-id="@booking.Id" style="display: inline-block;">
+                                    <input type="submit" class="genric-btn danger" value="Cancel" />
+                                </form>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No booking found.</p>
+        }
+
+        <a asp-area="Administration" asp-controller="ManageBookings" asp-action="Search" class="genric-btn primary">Add</a>
     </div>
-
-    @if (Model.Accommodations != null)
-    {
-        var accommodationsCount = 0;
-
-        <hr />
-        <h3>Found results:</h3>
-
-        <table class="table table-striped">
-        <thead>
-            <tr style="text-align: center;">
-                <th scope="col">#</th>
-                <th scope="col">View</th>
-                <th scope="col">Name</th>
-                <th scope="col">Price</th>
-                <th scope="col">Create booking</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var accommodation in Model.Accommodations)
-            {
-                accommodationsCount++;
-
-                <tr style="text-align: center;">
-                    <th scope="row" style="vertical-align: middle;">@accommodationsCount</th>
-                    <td style="vertical-align: middle;"><img src="/general/image/rooms/@accommodation.ImageName" alt="@accommodation.Name" style="width: 100px; height: 100px; object-fit: cover;" /></td>
-                    <td style="vertical-align: middle;">@accommodation.Name</td>
-                    <td style="vertical-align: middle;">$@(accommodation.Price * Model.Days)</td>
-                    <td style="vertical-align: middle;">
-                        <form method="get" asp-action="Add">
-                            <input type="hidden" asp-for="CheckIn" />
-                            <input type="hidden" asp-for="CheckOut" />
-                            <input type="hidden" asp-for="GuestsCount" />
-                            <input type="hidden" id="Price" name="Price" value="@(accommodation.Price * Model.Days)" />
-                            <input type="hidden" id="Id" name="Id" value="@accommodation.Id" />
-                            <input type="submit" value="Create a new book" class="genric-btn primary" />
-                        </form>
-                    </td>
-                </tr>
-            }
-        </tbody>
-        </table>
-    }
 </section>
 <br />

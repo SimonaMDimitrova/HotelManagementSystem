@@ -27,7 +27,18 @@
             this.bookingsService = bookingsService;
         }
 
-        public IActionResult Index(AccommodationSearchInputModel<AccommodationViewModel> input)
+        public IActionResult Index()
+        {
+            var bookings = this.bookingsService.GetAll<BookingViewModel>();
+            var viewModel = new BookingsListViewModel
+            {
+                Bookings = bookings,
+            };
+
+            return this.View(viewModel);
+        }
+
+        public IActionResult Search(AccommodationSearchInputModel<AccommodationViewModel> input)
         {
             var accommodations = this.accommodationsService.GetAvailable<AccommodationViewModel>(input);
             if (accommodations != null)
@@ -79,6 +90,39 @@
             }
 
             await this.bookingsService.AddAsync(input);
+
+            return this.RedirectToAction(nameof(this.Index));
+        }
+
+        public IActionResult Edit(string id)
+        {
+            var viewModel = this.bookingsService.GetById<EditBookingViewModel>(id);
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditBookingViewModel input)
+        {
+            if (input.CheckIn >= input.CheckOut)
+            {
+                this.ModelState.AddModelError(nameof(input.CheckIn), "Check in date must be days before check out date!");
+            }
+
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
+
+            await this.bookingsService.EditAsync(input);
+
+            return this.RedirectToAction(nameof(this.Index));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Cancel(string id)
+        {
+            await this.bookingsService.CancelAsync(id);
 
             return this.RedirectToAction(nameof(this.Index));
         }

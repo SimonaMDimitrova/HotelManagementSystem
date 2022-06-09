@@ -11,7 +11,7 @@
 
         public string Name { get; set; }
 
-        public double AddictionalPrice { get; set; }
+        public double AdditionalPrice { get; set; }
 
         public int Count { get; set; }
 

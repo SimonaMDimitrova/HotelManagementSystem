@@ -22,7 +22,7 @@
         {
             var beds = this.dbContext
                 .BedTypes
-                .OrderByDescending(x => x.Price)
+                .OrderBy(x => x.Price)
                 .To<T>()
                 .ToList();
 
@@ -62,6 +62,17 @@
             bed.Price = input.Price;
 
             await this.dbContext.SaveChangesAsync();
+        }
+
+        public IEnumerable<string> GetAllByAccommodationId(string id)
+        {
+            var beds = this.dbContext
+                .AccommodationBedTypes
+                .Where(x => x.AccommodationId == id)
+                .Select(x => x.BedType.Name)
+                .ToList();
+
+            return beds;
         }
     }
 }

@@ -45,6 +45,8 @@
 
             await this.contactService.EditAsync(input);
 
+            this.TempData["ContactEdit"] = "Successfully edited!";
+
             return this.View();
         }
 

@@ -1,0 +1,117 @@
+﻿@using System.Globalization
+@using HotelManagementSystem.Web.InputModels.Bookings
+@model BookingInputModel
+@{
+    this.ViewData["Title"] = "Booking ...";
+}
+
+<section class="container">
+    <div class="section-top-border">
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<h3 class="mb-30 title_color">Booking details</h3>
+				<form method="post" enctype="multipart/form-data">
+                    <div>
+                        <p><strong>@Model.CheckIn.ToString("d", DateTimeFormatInfo.InvariantInfo)</strong> - <strong>@Model.CheckOut.ToString("d", DateTimeFormatInfo.InvariantInfo)</strong></p>
+                        <p><strong>Guests:</strong> @Model.GuestsCount</p>
+                        <p><strong>Price:</strong> $<span id="price-id">@Model.Price.ToString("f2")</span></p>
+                        <p><strong>Beds:</strong> @string.Join(", ", Model.BedTypes.ToList())</p>
+                    </div>
+
+                    <input type="hidden" asp-for="AccommodationId" />
+                    <input type="hidden" asp-for="Price" />
+                    <input type="hidden" asp-for="CheckIn" />
+                    <input type="hidden" asp-for="CheckOut" />
+                    <input type="hidden" asp-for="User.Username" />
+
+					<div class="mt-10">
+						<input style="border: 1px solid #ced4da;" class="single-input-primary" placeholder="First name ..." asp-for="User.FirstName" />
+                        <span asp-validation-for="User.FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="mt-10">
+						<input style="border: 1px solid #ced4da;" class="single-input-primary" placeholder="Last name ..." asp-for="User.LastName" />
+                        <span asp-validation-for="User.LastName" class="text-danger"></span>
+					</div>
+                    <div class="mt-10">
+						<input style="border: 1px solid #ced4da;" class="single-input-primary" placeholder="Phone number ..." asp-for="User.PhoneNumber" />
+                        <span asp-validation-for="User.PhoneNumber" class="text-danger"></span>
+					</div>
+
+                    <div class="mt-10">
+						<input style="border: 1px solid #ced4da;" class="single-input-primary" placeholder="PID ..." asp-for="User.PID" />
+                        <span asp-validation-for="User.PID" class="text-danger"></span>
+					</div>
+
+                    <br />
+					<h3 class="mb-30 title_color">Facilities</h3>
+
+                    <div id="facilities-ids">
+                        @foreach (var facility in Model.Facilities)
+                        {
+                            <div style="width: 30%; display: inline-block;">
+                                @if (facility.PricePerDay == 0)
+                                {
+                                    <input id="facility_@facility.Id"
+                                        type="checkbox"
+                                        name="FacilitiesIds"
+                                        class="primary-checkbox"
+                                        checked
+                                        disabled
+                                        price="@(facility.PricePerDay * Model.Days)"
+                                        value="@facility.Id" />
+                                }
+                                else if (Model.FacilitiesIds != null && Model.FacilitiesIds.Contains(facility.Id))
+                                {
+                                    <input id="facility_@facility.Id"
+                                        type="checkbox"
+                                        name="FacilitiesIds"
+                                        class="primary-checkbox"
+                                        checked
+                                        price="@(facility.PricePerDay * Model.Days)"
+                                        value="@facility.Id" />
+                                }
+                                else
+                                {
+                                    <input id="facility_@facility.Id"
+                                        type="checkbox"
+                                        class="primary-checkbox"
+                                        name="FacilitiesIds"
+                                        price="@(facility.PricePerDay * Model.Days)"
+                                        value="@facility.Id" />
+                                }
+
+                                <label for="facility_@facility.Id">@facility.Name</label>
+                            </div>
+                        }
+                    </div>
+					<hr />
+					<input type="submit" value="Book now!" class="genric-btn primary">
+				</form>
+            </div>
+        </div>
+    </div>
+    <br />
+</section>
+
+@section Scripts {
+    <script>
+        let facilities = Array.from(document.querySelectorAll("#facilities-ids input"));
+        let price = document.getElementById("price-id");
+
+        for (let i = 0; i < facilities.length; i++) {
+            let currentFacility = facilities[i];
+            currentFacility.addEventListener("input", (e) => {
+                let currentPrice = parseInt(e.target.getAttribute("price"));
+                if (e.target.checked) {
+                    let newPrice = parseInt(price.innerText) + currentPrice;
+                    price.innerText = newPrice.toFixed(2);
+                } else {
+                    let newPrice = parseInt(price.innerText) - currentPrice;
+                    price.innerText = newPrice;
+                }
+
+            })
+        }
+    </script>
+}

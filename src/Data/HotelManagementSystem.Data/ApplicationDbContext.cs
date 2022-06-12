@@ -26,8 +26,6 @@
 
         public DbSet<AboutUsInfo> AboutUsPageInfo { get; set; }
 
-        public DbSet<Image> Image { get; set; }
-
         public DbSet<Contact> Contact { get; set; }
 
         public DbSet<Facility> Facilities { get; set; }

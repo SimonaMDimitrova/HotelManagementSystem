@@ -12,9 +12,11 @@
 
         public string? Name { get; set; }
 
-        [Range(0, 500)]
+        [Range(0, 500, ErrorMessage = "Must be between 0 and 500 dollars.")]
+        [Display(Name = "Price per day")]
         public decimal PricePerDay { get; set; }
 
+        [Display(Name = "Is facility available?")]
         public bool IsAvailable { get; set; }
     }
 }

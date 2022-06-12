@@ -9,6 +9,12 @@
         <h1>Edit facilities</h1>
     </div>
 
+    @if (this.TempData.ContainsKey("EditFacility"))
+    {
+        <br />
+        <div class="alert alert-success margins-temp">@this.TempData["EditFacility"]</div>
+    }
+
     <div class="welcome col-md-10">
         @{
             foreach (var facility in Model.Facilities)

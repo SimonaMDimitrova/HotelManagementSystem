@@ -17,7 +17,7 @@
             configuration.CreateMap<AboutUsInfo, AboutUsInfoViewModel>()
                 .ForMember(x => x.ImageUrl, opt =>
                     opt.MapFrom(x =>
-                        $"/general/image/about-us/{x.Image.Id}.{x.Image.Extension}"));
+                        $"/general/image/about-us/{x.Image}"));
         }
     }
 }

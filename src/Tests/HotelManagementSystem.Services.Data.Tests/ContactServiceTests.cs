@@ -41,14 +41,11 @@ namespace HotelManagementSystem.Services.Data.Tests
             var toBeEditedModel = new ContactInputModel
             {
                 PhoneNumber = "088888881",
-                Address = "Some address here 1",
-                Country = "USA",
                 Email = "hotel1@gmail.com",
                 EndOfTheWorkingDayHour = 4,
                 EndOfTheWorkingDayMinutes = 30,
                 StartOfTheWorkingDayHour = 10,
                 StartOfTheWorkingDayMinutes = 10,
-                Town = "New York",
             };
 
             await service.EditAsync(toBeEditedModel);

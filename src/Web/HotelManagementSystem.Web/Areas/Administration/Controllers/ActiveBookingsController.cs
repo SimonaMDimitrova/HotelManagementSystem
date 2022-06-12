@@ -3,19 +3,20 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+
     using HotelManagementSystem.Services.Data;
     using HotelManagementSystem.Web.InputModels.Area.Administration.ManageBookings;
     using HotelManagementSystem.Web.ViewModels.Area.Administration.ManageBookings;
     using Microsoft.AspNetCore.Mvc;
 
-    public class ManageBookingsController : ReceptionistController
+    public class ActiveBookingsController : ReceptionistController
     {
         private readonly IAccommodationsService accommodationsService;
         private readonly IBedTypesService bedTypesService;
         private readonly IFacilitiesService facilitiesService;
         private readonly IBookingsService bookingsService;
 
-        public ManageBookingsController(
+        public ActiveBookingsController(
             IAccommodationsService accommodationsService,
             IBedTypesService bedTypesService,
             IFacilitiesService facilitiesService,
@@ -29,7 +30,7 @@
 
         public IActionResult Index()
         {
-            var bookings = this.bookingsService.GetAll<BookingViewModel>();
+            var bookings = this.bookingsService.GetAllActive<BookingViewModel>();
             var viewModel = new BookingsListViewModel
             {
                 Bookings = bookings,
@@ -50,7 +51,7 @@
             return this.View(input);
         }
 
-        public IActionResult Add(string id, DateTime checkIn, DateTime checkOut, double price, int guestsCount)
+        public IActionResult Add(string id, DateTime checkIn, DateTime checkOut, decimal price, int guestsCount)
         {
             var viewModel = new BookingInputModel
             {
@@ -62,8 +63,8 @@
                 Days = (checkOut.Date - checkIn.Date).Days,
             };
 
-            var facilities = this.facilitiesService.GetAll<FacilityInputModel>();
-            var bedTypes = this.bedTypesService.GetAll<BedTypeInputModel>();
+            var facilities = this.facilitiesService.GetAllAvailable<FacilityInputModel>();
+            var bedTypes = this.bedTypesService.GetAllByAccommodationId(id);
 
             viewModel.Facilities = facilities;
             viewModel.BedTypes = bedTypes;
@@ -76,45 +77,49 @@
         {
             if (!this.ModelState.IsValid)
             {
-                var facilities = this.facilitiesService.GetAll<FacilityInputModel>();
-                var bedTypes = this.bedTypesService.GetAll<BedTypeInputModel>();
-
+                var facilities = this.facilitiesService.GetAllAvailable<FacilityInputModel>();
+                var bedTypes = this.bedTypesService.GetAllByAccommodationId(input.AccommodationId);
 
                 input.Facilities = facilities;
                 input.BedTypes = bedTypes;
                 input.Days = (input.CheckOut - input.CheckIn).Days;
 
-                input.Price += (double)facilities.Where(x => input.FacilitiesIds.Contains(x.Id)).Sum(x => x.PricePerDay * input.Days);
+                if (input.FacilitiesIds != null)
+                {
+                    input.Price += (decimal)facilities.Where(x => input.FacilitiesIds.Contains(x.Id)).Sum(x => x.PricePerDay * input.Days);
+                }
 
                 return this.View(input);
             }
 
-            await this.bookingsService.AddAsync(input);
+            await this.bookingsService.AddWithoutUserAsync(input);
+
+            this.TempData["AddBookingAdmin"] = "Successfully added!";
 
             return this.RedirectToAction(nameof(this.Index));
         }
 
-        public IActionResult Edit(string id)
+        public IActionResult Status(string id)
         {
-            var viewModel = this.bookingsService.GetById<EditBookingViewModel>(id);
+            var viewModel = this.bookingsService.GetStatus(id);
 
             return this.View(viewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(EditBookingViewModel input)
+        public async Task<IActionResult> Status(BookingStatusInputModel input)
         {
-            if (input.CheckIn >= input.CheckOut)
+            try
             {
-                this.ModelState.AddModelError(nameof(input.CheckIn), "Check in date must be days before check out date!");
+                await this.bookingsService.EditAsync(input);
             }
-
-            if (!this.ModelState.IsValid)
+            catch (Exception ex)
             {
+                this.ModelState.AddModelError(nameof(input.CheckIn), ex.Message);
                 return this.View(input);
             }
 
-            await this.bookingsService.EditAsync(input);
+            this.TempData["ChangedStatus"] = "Changed status!";
 
             return this.RedirectToAction(nameof(this.Index));
         }
@@ -123,6 +128,8 @@
         public async Task<IActionResult> Cancel(string id)
         {
             await this.bookingsService.CancelAsync(id);
+
+            this.TempData["DeleteBookingAdmin"] = "Successfully deleted!";
 
             return this.RedirectToAction(nameof(this.Index));
         }

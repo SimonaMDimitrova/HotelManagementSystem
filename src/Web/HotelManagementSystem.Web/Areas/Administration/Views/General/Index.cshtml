@@ -9,6 +9,12 @@ this.ViewData["Title"] = "General";
         <h1>Edit general information</h1>
     </div>
 
+    @if (this.TempData.ContainsKey("GeneralEdit"))
+    {
+        <br />
+        <div class="alert alert-success margins-temp">@this.TempData["GeneralEdit"]</div>
+    }
+
     <div class="welcome col-md-6">
         <form method="post" enctype="multipart/form-data">
             <div class="form-group row">

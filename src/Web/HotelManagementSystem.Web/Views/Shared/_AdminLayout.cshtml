@@ -48,7 +48,9 @@
 					<li><a asp-area="Administration" asp-controller="ManageFacilities" asp-action="">Manage facilities</a></li>
 				}
 				
-				<li><a asp-area="Administration" asp-controller="ManageBookings" asp-action="">Manage bookings</a></li>
+				<li><a asp-area="Administration" asp-controller="ActiveBookings" asp-action="">Active bookings</a></li>
+				<li><a asp-area="Administration" asp-controller="PastBookings" asp-action="">Past bookings</a></li>
+				<li><a asp-area="Administration" asp-controller="CanceledBookings" asp-action="">Canceled bookings</a></li>
 				<li><a asp-area="Administration" asp-controller="Gallery" asp-action="">Gallery</a></li>
 			</ul>
 		</nav>
@@ -63,6 +65,18 @@
 		</div>
 	</div>
 
+    <script src="~/general/js/jquery-3.2.1.min.js" asp-append-version="true"></script>
+    <script src="~/general/js/popper.js" asp-append-version="true"></script>
+    <script src="~/general/js/bootstrap.min.js" asp-append-version="true"></script>
+    <script src="~/general/vendors/owl-carousel/owl.carousel.min.js" asp-append-version="true"></script>
+    <script src="~/general/js/jquery.ajaxchimp.min.js" asp-append-version="true"></script>
+    <script src="~/general/js/mail-script.js" asp-append-version="true"></script>
+    <script src="~/general/vendors/bootstrap-datepicker/bootstrap-datetimepicker.min.js" asp-append-version="true"></script>
+    <script src="~/general/vendors/nice-select/js/jquery.nice-select.js" asp-append-version="true"></script>
+    <script src="~/general/js/mail-script.js" asp-append-version="true"></script>
+    <script src="~/general/js/stellar.js" asp-append-version="true"></script>
+    <script src="~/general/vendors/lightbox/simpleLightbox.min.js" asp-append-version="true"></script>
+    <script src="~/general/js/custom.js" asp-append-version="true"></script>
 	<script type="text/javascript" src="~/administration/js/jquery-1.11.0.min.js" asp-append-version="true"></script>
 	<script type="text/javascript" src="~/administration/js/jquery.nav.js" asp-append-version="true"></script>
 	<script type="text/javascript" src="~/administration/syntax-highlighter/scripts/shCore.js" asp-append-version="true"></script>

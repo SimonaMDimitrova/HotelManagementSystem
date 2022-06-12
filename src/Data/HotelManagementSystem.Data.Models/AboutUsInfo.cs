@@ -15,8 +15,6 @@
 
         public string Description { get; set; }
 
-        public virtual Image Image { get; set; }
-
-        public string ImageId { get; set; }
+        public string Image { get; set; }
     }
 }

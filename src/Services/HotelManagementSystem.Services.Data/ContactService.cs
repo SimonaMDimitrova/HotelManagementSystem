@@ -45,10 +45,7 @@
                 .Contact
                 .First();
 
-            contact.Address = input.Address;
             contact.Email = input.Email;
-            contact.Country = input.Country;
-            contact.Town = input.Town;
             contact.PhoneNumber = input.PhoneNumber;
             contact.StartOfTheWorkingDay = new TimeSpan(input.StartOfTheWorkingDayHour, input.StartOfTheWorkingDayMinutes, 0);
             contact.EndOfTheWorkingDay = new TimeSpan(input.EndOfTheWorkingDayHour, input.EndOfTheWorkingDayMinutes, 0);

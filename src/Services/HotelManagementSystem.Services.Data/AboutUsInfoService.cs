@@ -34,11 +34,14 @@
             aboutUsInfoEdited.Title = input.Title;
             aboutUsInfoEdited.Description = input.Description;
 
-            var image = input.Image;
-            var extension = Path.GetExtension(image.FileName).TrimStart('.');
-            var physicalPath = $"{imagePath}/{aboutUsInfoEdited.ImageId}.{extension}";
-            using Stream fileStream = new FileStream(physicalPath, FileMode.Create);
-            await image.CopyToAsync(fileStream);
+            if (input.Image != null)
+            {
+                var image = input.Image;
+                var extension = Path.GetExtension(image.FileName).TrimStart('.');
+                var physicalPath = $"{imagePath}/{aboutUsInfoEdited.Image}";
+                using Stream fileStream = new FileStream(physicalPath, FileMode.Create);
+                await image.CopyToAsync(fileStream);
+            }
 
             await this.dbContext.SaveChangesAsync();
         }
@@ -47,7 +50,7 @@
         {
             var imageUrl = this.dbContext
                 .AboutUsPageInfo
-                .Select(x => $"/general/image/about-us/{x.Image.Id}.{x.Image.Extension}")
+                .Select(x => $"/general/image/about-us/{x.Image}")
                 .First();
 
             return imageUrl;

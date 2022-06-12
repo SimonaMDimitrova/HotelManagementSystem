@@ -11,7 +11,7 @@
 
         public string? Name { get; set; }
 
-        [Range(10, 200)]
-        public double Price { get; set; }
+        [Range(10, 200, ErrorMessage = "Price must be between 10 and 200 dolars.")]
+        public decimal Price { get; set; }
     }
 }

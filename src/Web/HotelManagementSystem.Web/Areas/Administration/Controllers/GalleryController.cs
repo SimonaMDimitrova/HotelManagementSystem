@@ -44,8 +44,12 @@
             }
             catch (System.Exception)
             {
+                this.TempData["NotAddedImages"] = $"We couldn't add your images.";
+
                 return this.RedirectToAction(nameof(this.Index));
             }
+
+            this.TempData["AddedImages"] = $"All images added!";
 
             return this.RedirectToAction(nameof(this.Index));
         }
@@ -55,6 +59,8 @@
         {
             var path = $"{this.environment.WebRootPath}/general/image/gallery/{id}";
             this.imagesService.Delete(path);
+
+            this.TempData["RemovedImage"] = $"Successfully removed!";
 
             return this.RedirectToAction(nameof(this.Index));
         }

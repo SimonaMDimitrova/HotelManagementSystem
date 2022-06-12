@@ -18,11 +18,21 @@
 
         public DateTime CheckOut { get; set; }
 
+        public DateTime? ActualCheckIn { get; set; }
+
+        public DateTime? ActualCheckOut { get; set; }
+
+        public bool IsPaid { get; set; }
+
+        public decimal Price { get; set; }
+
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
 
         public string PhoneNumber { get; set; }
+
+        public string PID { get; set; }
 
         public virtual Accommodation Accommodation { get; set; }
 

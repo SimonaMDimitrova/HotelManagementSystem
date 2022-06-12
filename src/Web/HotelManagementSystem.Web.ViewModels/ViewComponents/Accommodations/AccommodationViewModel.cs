@@ -14,7 +14,7 @@
     {
         public string Name { get; set; }
 
-        public double PricePerNight { get; set; }
+        public decimal PricePerNight { get; set; }
 
         public int GuestsCount { get; set; }
 

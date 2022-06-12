@@ -57,6 +57,8 @@
                 return this.RedirectToAction(nameof(this.Index));
             }
 
+            this.TempData["EditFacility"] = "Successfully edited!";
+
             return this.RedirectToAction(nameof(this.Index));
         }
     }

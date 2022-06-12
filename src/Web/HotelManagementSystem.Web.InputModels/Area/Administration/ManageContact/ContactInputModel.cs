@@ -8,28 +8,14 @@
 
     public class ContactInputModel : IMapFrom<Contact>, IHaveCustomMappings
     {
-        [Required]
-        [RegularExpression(@"^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$")]
+        [Required(ErrorMessage = "Enter valid phone number.")]
+        [RegularExpression(@"^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$", ErrorMessage = "Enter valid phone number.")]
+        [Display(Name = "Phone number")]
         public string PhoneNumber { get; set; }
 
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "Enter valid e-mail.")]
+        [EmailAddress(ErrorMessage = "Enter valid e-mail.")]
         public string Email { get; set; }
-
-        [Required]
-        [MinLength(3)]
-        [MaxLength(100)]
-        public string Country { get; set; }
-
-        [Required]
-        [MinLength(3)]
-        [MaxLength(100)]
-        public string Town { get; set; }
-
-        [Required]
-        [MinLength(3)]
-        [MaxLength(100)]
-        public string Address { get; set; }
 
         public int StartOfTheWorkingDayHour { get; set; }
 

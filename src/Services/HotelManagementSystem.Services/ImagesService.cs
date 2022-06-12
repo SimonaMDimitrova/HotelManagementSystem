@@ -14,6 +14,7 @@
         {
             var directory = new DirectoryInfo(path);
             var images = directory.GetFiles()
+                .OrderByDescending(x => x.CreationTimeUtc)
                 .Select(x => x.Name)
                 .ToArray();
 

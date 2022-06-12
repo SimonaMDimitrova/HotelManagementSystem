@@ -7,14 +7,26 @@
 
     public interface IBookingsService
     {
-        public Task AddAsync(BookingInputModel input);
+        public Task AddWithoutUserAsync(BookingInputModel input);
+
+        public Task AddWithUserAsync(HotelManagementSystem.Web.InputModels.Bookings.BookingInputModel input);
 
         public IEnumerable<T> GetAll<T>();
+
+        public IEnumerable<T> GetAllActive<T>();
+
+        public IEnumerable<T> GetAllPast<T>();
+
+        public IEnumerable<T> GetAllCanceled<T>();
 
         public T GetById<T>(string id);
 
         public Task CancelAsync(string id);
 
-        public Task EditAsync(EditBookingViewModel input);
+        public BookingStatusInputModel GetStatus(string id);
+
+        public Task EditAsync(BookingStatusInputModel input);
+
+        public IEnumerable<T> GetByUserId<T>(string username);
     }
 }

@@ -39,6 +39,8 @@
 
             await this.aboutUsInfoService.EditAsync(input, $"{this.environment.WebRootPath}/general/image/about-us");
 
+            this.TempData["GeneralEdit"] = "Successfully edited!";
+
             return this.RedirectToAction();
         }
     }

@@ -38,36 +38,42 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                         <ul class="nav navbar-nav menu_nav ml-auto" id="nav-bar">
-                            <li class="nav-item active"><a class="nav-link" asp-controller="Home">Home</a></li> 
-                            <li class="nav-item"><a class="nav-link" asp-controller="AboutUs">About us</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-controller="Accommodations">Accommodations</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-controller="Gallery">Gallery</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-controller="Contact">Contact</a></li>
-                                @if (this.SignInManager.IsSignedIn(this.User))
-                                {
-                                    <li class="nav-item"><a class="nav-link" asp-controller="Bookings">Bookings</a></li>
+                            <li class="nav-item active"><a class="nav-link" asp-area="" asp-controller="Home">Home</a></li> 
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="AboutUs">About us</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Accommodations">Accommodations</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Gallery">Gallery</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Contact">Contact</a></li>
+                            @if (this.SignInManager.IsSignedIn(this.User))
+                            {
+                                <li class="nav-item"><a class="nav-link" asp-controller="Bookings">Bookings</a></li>
 
-                                    if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
-                                    {
-                                        <li class="nav-item">
-                                            <a class="nav-link" asp-area="Administration" asp-controller="General">Admin panel</a>
-                                        </li> 
-                                    }
-                                    <li class="nav-item">
-                                        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
-                                            <button type="submit" class="nav-link btn btn-link" style="cursor: pointer;">Logout</button>
-                                        </form>
-                                    </li>
-                                }
-                                else
+                                if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
                                 {
                                     <li class="nav-item">
-                                        <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Register</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Login</a>
-                                    </li>
+                                        <a class="nav-link" asp-area="Administration" asp-controller="General">Admin panel</a>
+                                    </li> 
                                 }
+                                else if (this.User.IsInRole(GlobalConstants.ReceptionistRoleName))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-area="Administration" asp-controller="ActiveBookings">Admin panel</a>
+                                    </li> 
+                                }
+                                <li class="nav-item">
+                                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
+                                        <button type="submit" class="nav-link btn btn-link" style="cursor: pointer;">Logout</button>
+                                    </form>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                                </li>
+                            }
                         </ul>
                     </div> 
                 </nav>
@@ -85,8 +91,7 @@
 					    <div class="banner_content text-center">
 						    <h6>Away from monotonous life</h6>
 						    <h2>Relax Your Mind</h2>
-						    <p>If you are looking at blank cassettes on the web, you may be very confused at the<br> difference in price. You may see some for as low as $.17 each.</p>
-						    <a href="#" class="btn theme_btn button_hover">Get Started</a>
+						    <p>While you enjoy a cocktail by the swimming pool on the rooftop terrace,<br />you will be stunned by the breathtaking view</p>
 					    </div>
 				    </div>
                 </div>
@@ -97,45 +102,47 @@
                                 <h2>Book<br> Your Room</h2>
                             </div>
                             <div class="col-md-9">
-                                <div class="boking_table">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="book_tabel_item">
-                                                <div class="form-group">
-                                                    <div class='input-group date' id='datetimepicker11'>
-                                                        <input type='text' class="form-control" placeholder="Arrival Date"/>
-                                                        <span class="input-group-addon">
-                                                            <i class="fa fa-calendar" aria-hidden="true"></i>
-                                                        </span>
+                                <form method="get" asp-controller="Home" asp-action="Search">
+                                    <div class="boking_table">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="book_tabel_item">
+                                                    <div class="form-group">
+                                                        <div class='input-group date' id='datetimepicker11'>
+                                                            <input type='text' class="form-control" name="CheckIn" id="CheckIn" placeholder="Arrival Date"/>
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                            </span>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class='input-group date' id='datetimepicker1'>
-                                                        <input type='text' class="form-control" placeholder="Departure Date"/>
-                                                        <span class="input-group-addon">
-                                                            <i class="fa fa-calendar" aria-hidden="true"></i>
-                                                        </span>
+                                                    <div class="form-group">
+                                                        <div class='input-group date' id='datetimepicker1'>
+                                                            <input type='text' class="form-control" name="CheckOut" id="CheckOut" placeholder="Departure Date"/>
+                                                            <span class="input-group-addon">
+                                                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                            </span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="book_tabel_item">
-                                                <div class="input-group">
-                                                    <select class="wide">
-                                                        <option data-display="Guests">Number of Guests</option>
-                                                        <option value="1">1 Guest</option>
-                                                        <option value="2">2 Guest</option>
-                                                        <option value="3">3 Guest</option>
-                                                        <option value="4">4 Guest</option>
-                                                        <option value="5">5 Guest</option>
-                                                    </select>
+                                            <div class="col-md-6">
+                                                <div class="book_tabel_item">
+                                                    <div class="input-group">
+                                                        <select class="wide" name="GuestsCount" id="GuestsCount">
+                                                            <option data-display="Guests" value="0">Number of Guests</option>
+                                                            <option value="1">1 Guest</option>
+                                                            <option value="2">2 Guest</option>
+                                                            <option value="3">3 Guest</option>
+                                                            <option value="4">4 Guest</option>
+                                                            <option value="5">5 Guest</option>
+                                                        </select>
+                                                    </div>
+                                                    <input class="book_now_btn button_hover" type="submit" value="Search">
                                                 </div>
-                                                <a class="book_now_btn button_hover" href="#">Book Now</a>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -168,8 +175,8 @@
             <div class="row">
                 <div class="col-lg-3  col-md-6 col-sm-6">
                     <div class="single-footer-widget">
-                        <h6 class="footer_title">About Agency</h6>
-                        <p>The world has become so fast paced that people don’t want to stand by reading a page of information, they would much rather look at a presentation and understand the message. It has come to a point </p>
+                        <h6 class="footer_title">About the hotel</h6>
+                        <p>Royal Hotel features a terrace and views of the city. Among the facilities of this property are a restaurant, a 24-hour front desk and room service, along with free WiFi.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
@@ -178,18 +185,32 @@
                         <div class="row">
                             <div class="col-4">
                                 <ul class="list_style">
-                                    <li><a href="#">Home</a></li>
-                                    <li><a href="#">Feature</a></li>
-                                    <li><a href="#">Services</a></li>
-                                    <li><a href="#">Portfolio</a></li>
+                                    <li><a asp-area="" asp-controller="Home">Home</a></li> 
+                                    <li><a asp-area="" asp-controller="AboutUs">About us</a></li>
+                                    <li><a asp-area="" asp-controller="Accommodations">Accommodations</a></li>
+                                    <li><a asp-area="" asp-controller="Gallery">Gallery</a></li>
                                 </ul>
                             </div>
                             <div class="col-4">
-                                <ul class="list_style">
-                                    <li><a href="#">Team</a></li>
-                                    <li><a href="#">Pricing</a></li>
-                                    <li><a href="#">Blog</a></li>
-                                    <li><a href="#">Contact</a></li>
+                                <ul class="list_style" style="position: relative; left: 50px;">
+                                    <li><a asp-area="" asp-controller="Contact">Contact</a></li>
+                                    @if (this.SignInManager.IsSignedIn(this.User))
+                                    {
+                                        <li><a asp-controller="Bookings">Bookings</a></li>
+
+                                        if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                                        {
+                                            <li>
+                                                <a asp-area="Administration" asp-controller="General" style="width: 100px;">Admin panel</a>
+                                            </li> 
+                                        }
+                                        else if (this.User.IsInRole(GlobalConstants.ReceptionistRoleName))
+                                        {
+                                            <li>
+                                                <a asp-area="Administration" asp-controller="ActiveBookings">Admin panel</a>
+                                            </li> 
+                                        }
+                                    }
                                 </ul>
                             </div>										
                         </div>							
@@ -197,14 +218,15 @@
                 </div>							
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="single-footer-widget">
-                        <h6 class="footer_title">Newsletter</h6>
-                        <p>For business professionals caught between high OEM price and mediocre print and graphic output, </p>		
+                        <h6 class="footer_title">Quick question</h6>
+                        <p>If you have any quick question - don't hesitate, ask!</p>		
                         <div id="mc_embed_signup">
-                            <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="subscribe_form relative">
+                            <form action="javascript:void(0);" method="post" id="contactForm" class="subscribe_form relative">
                                 <div class="input-group d-flex flex-row">
-                                    <input name="EMAIL" placeholder="Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address '" required="" type="email">
+                                    <input name="email" id="email" placeholder="Email Address" type="text">
+                                    <input name="question" id="question" placeholder="Question" type="email">
                                     <button class="btn sub-btn"><span class="lnr lnr-location"></span></button>		
-                                </div>									
+                                </div>
                                 <div class="mt-10 info"></div>
                             </form>
                         </div>
@@ -231,12 +253,6 @@
                 <p class="col-lg-8 col-sm-12 footer-text m-0"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-                <div class="col-lg-4 col-sm-12 footer-social">
-                    <a href="#"><i class="fa fa-facebook"></i></a>
-                    <a href="#"><i class="fa fa-twitter"></i></a>
-                    <a href="#"><i class="fa fa-dribbble"></i></a>
-                    <a href="#"><i class="fa fa-behance"></i></a>
-                </div>
             </div>
         </div>
     </footer>
@@ -264,6 +280,22 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		    listElement.classList.add("active");
             listElements[0].classList.remove("active");
         }
+    </script>
+
+    <script>
+        let contactForm = document.getElementById("contactForm");
+        contactForm.addEventListener("submit", (e) => {
+            const data = Object.fromEntries(new FormData(e.target).entries());
+            console.log(e.target)
+            emailjs.send('service_96allcn', 'template_tj80i3t', data, "NkrK2L9jgcu6lSu_q")
+                .then(function() {
+                    console.log('SUCCESS!');
+                }, function(error) {
+                    console.log('FAILED...', error);
+                });
+
+            e.target.reset();
+        });
     </script>
     @await this.RenderSectionAsync("Scripts", required: false)
 </body>

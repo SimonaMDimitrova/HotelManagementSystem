@@ -5,7 +5,6 @@
 
     using HotelManagementSystem.Web.InputModels.Area.Administration.ManageAccommodations;
     using HotelManagementSystem.Web.InputModels.Area.Administration.ManageBookings;
-    using HotelManagementSystem.Web.ViewModels.Area.Administration.ManageBookings;
 
     public interface IAccommodationsService
     {

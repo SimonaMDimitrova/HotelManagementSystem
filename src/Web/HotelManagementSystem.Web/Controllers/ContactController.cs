@@ -9,14 +9,11 @@
     public class ContactController : BaseController
     {
         private readonly IContactService contactService;
-        private readonly IEmailSender emailSender;
 
         public ContactController(
-            IContactService contactService,
-            IEmailSender emailSender)
+            IContactService contactService)
         {
             this.contactService = contactService;
-            this.emailSender = emailSender;
         }
 
         public IActionResult Index()

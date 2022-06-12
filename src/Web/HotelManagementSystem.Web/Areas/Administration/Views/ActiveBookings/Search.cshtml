@@ -61,7 +61,7 @@
                         <th scope="row" style="vertical-align: middle;">@accommodationsCount</th>
                         <td style="vertical-align: middle;"><img src="/general/image/rooms/@accommodation.ImageName" alt="@accommodation.Name" style="width: 100px; height: 100px; object-fit: cover;" /></td>
                         <td style="vertical-align: middle;">@accommodation.Name</td>
-                        <td style="vertical-align: middle;">$@(accommodation.Price * Model.Days)</td>
+                        <td style="vertical-align: middle;">$@((accommodation.Price * Model.Days).ToString("f2"))</td>
                         <td style="vertical-align: middle;">
                             <form method="get" asp-action="Add">
                                 <input type="hidden" asp-for="CheckIn" />
@@ -76,6 +76,11 @@
                 }
             </tbody>
         </table>
+    }
+    else
+    {
+        <hr />
+        <p>No bookings found.</p>
     }
 </section>
 <br />

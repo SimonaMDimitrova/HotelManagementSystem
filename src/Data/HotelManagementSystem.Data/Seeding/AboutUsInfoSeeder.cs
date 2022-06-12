@@ -20,11 +20,7 @@
 
             var title = "The Royal Hotel";
             var description = "Royal Hotel features a terrace and views of the city. Among the facilities of this property are a restaurant, a 24-hour front desk and room service, along with free WiFi. Free private parking is available and the hotel also provides car hire for guests who want to explore the surrounding area.";
-
-            var image = new Image
-            {
-                Extension = "jpg",
-            };
+            var image = "about-us-img.jpg";
 
             await dbContext.AboutUsPageInfo
                 .AddAsync(new AboutUsInfo { Title = title, Description = description, Image = image });

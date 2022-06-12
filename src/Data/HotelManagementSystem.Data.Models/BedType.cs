@@ -17,7 +17,7 @@
 
         public int Capacity { get; set; }
 
-        public double Price { get; set; }
+        public decimal Price { get; set; }
 
         public virtual ICollection<AccommodationBedType> AccommodationBedTypes { get; set; }
     }

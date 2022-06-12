@@ -9,6 +9,24 @@
         <h1>Edit gallery photos</h1>
     </div>
 
+    @if (this.TempData.ContainsKey("AddedImages"))
+    {
+        <br />
+        <div class="alert alert-success margins-temp">@this.TempData["AddedImages"]</div>
+    }
+
+    @if (this.TempData.ContainsKey("RemovedImage"))
+    {
+        <br />
+        <div class="alert alert-success margins-temp">@this.TempData["RemovedImage"]</div>
+    }
+
+    @if (this.TempData.ContainsKey("NotAddedImages"))
+    {
+        <br />
+        <div class="alert alert-danger margins-temp">@this.TempData["NotAddedImages"]</div>
+    }
+
     <div class="welcome text-left">
         <a class="genric-btn primary" asp-area="Administration" asp-controller="Gallery" asp-action="Add">Add new photo</a>
 
@@ -30,3 +48,4 @@
         <a class="genric-btn primary" asp-area="Administration" asp-controller="Gallery" asp-action="Add">Add new photo</a>
     </div>
 </section>
+<br />

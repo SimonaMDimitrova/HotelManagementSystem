@@ -5,11 +5,27 @@
 
 <section id="general">
 
-
-
     <div class="content-header">
         <h1>Manage roles</h1>
     </div>
+
+        @if (this.TempData.ContainsKey("RemovedFromRole"))
+        {
+            <br />
+            <div class="alert alert-success margins-temp">@this.TempData["RemovedFromRole"]</div>
+        }
+
+        @if (this.TempData.ContainsKey("AddedToRole"))
+        {
+            <br />
+            <div class="alert alert-success margins-temp">@this.TempData["AddedToRole"]</div>
+        }
+
+        @if (this.TempData.ContainsKey("CannotAddToRole"))
+        {
+            <br />
+            <div class="alert alert-danger margins-temp">@this.TempData["CannotAddToRole"]</div>
+        }
 
     <div class="welcome">
         <div class="accordion" id="accordionExample" style="text-align: center;">
@@ -38,7 +54,9 @@
                                     foreach (var user in role.Users)
                                     {
                                         @user.Value
-                                        <form method="post" asp-area="Administration" asp-controller="ManageRoles" asp-action="Delete" asp-route-id="@user.Key" style="display: inline;">
+                                        <form method="post" asp-area="Administration" asp-controller="ManageRoles" asp-action="Delete" style="display: inline;">
+                                            <input class="form-control" id="username" type="hidden" name="username" value="@user.Value" />
+                                            <input class="form-control" id="role" type="hidden" name="role" value="@role.Name" />
                                             <button id="deleteBtn" style="border: none; background: none;"><span class="badge badge-danger">Remove</span></button>
                                         </form>
                                         <hr />

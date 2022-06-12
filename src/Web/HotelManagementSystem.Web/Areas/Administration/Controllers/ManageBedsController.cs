@@ -55,6 +55,8 @@
                 return this.RedirectToAction(nameof(this.Index));
             }
 
+            this.TempData["EditBedPrice"] = "Successfully edited!";
+
             return this.RedirectToAction(nameof(this.Index));
         }
     }

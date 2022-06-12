@@ -1,13 +1,19 @@
 ﻿@model BedTypesListViewModel
 @{
-    this.ViewData["Title"] = "Manage bed prices";
+    this.ViewData["Title"] = "Manage Beds";
 }
 
 <section id="general">
 
     <div class="content-header">
-        <h1>Edit bed prices</h1>
+        <h1>Edit beds prices</h1>
     </div>
+
+    @if (this.TempData.ContainsKey("EditBedPrice"))
+    {
+        <br />
+        <div class="alert alert-success margins-temp">@this.TempData["EditBedPrice"]</div>
+    }
 
     <div class="welcome col-md-10">
         @{
@@ -20,7 +26,7 @@
                     </div>
 
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><strong>Price:</strong> @bed.Price</li>
+                        <li class="list-group-item"><strong>Price:</strong> $@bed.Price</li>
                     </ul>
 
                     <div class="card-body">

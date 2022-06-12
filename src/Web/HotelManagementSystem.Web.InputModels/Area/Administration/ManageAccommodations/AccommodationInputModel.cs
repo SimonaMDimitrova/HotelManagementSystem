@@ -11,11 +11,13 @@
 
         public string? Name { get; set; }
 
-        [Range(10, 500)]
-        public double AdditionalPrice { get; set; }
+        [Range(10, 500, ErrorMessage = "Must be between 10 and 500 dollars.")]
+        [Display(Name = "Additional price")]
+        public decimal AdditionalPrice { get; set; }
 
-        [MinLength(10)]
-        [MaxLength(200)]
+        [Required(ErrorMessage = "Insert description!")]
+        [MinLength(10, ErrorMessage = "Must be at least 10 letters length.")]
+        [MaxLength(200, ErrorMessage = "Must not be more than 200 letters length.")]
         public string Description { get; set; }
     }
 }

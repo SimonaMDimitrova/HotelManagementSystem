@@ -30,6 +30,18 @@
             return facilities;
         }
 
+        public IEnumerable<T> GetAllAvailable<T>()
+        {
+            var facilities = this.dbContext
+                .Facilities
+                .Where(x => x.IsAvailable)
+                .OrderBy(x => x.PricePerDay)
+                .To<T>()
+                .ToList();
+
+            return facilities;
+        }
+
         public T GetById<T>(string id)
         {
             var facility = this.dbContext

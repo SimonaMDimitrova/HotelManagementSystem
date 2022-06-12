@@ -9,6 +9,8 @@
     {
         public IEnumerable<T> GetAll<T>();
 
+        public IEnumerable<string> GetAllByAccommodationId(string id);
+
         public T GetById<T>(string id);
 
         public string GetNameById(string id);

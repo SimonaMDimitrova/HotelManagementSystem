@@ -9,6 +9,8 @@
     {
         public IEnumerable<T> GetAll<T>();
 
+        public IEnumerable<T> GetAllAvailable<T>();
+
         public T GetById<T>(string id);
 
         public Task EditAsync(FacilityInputModel input);

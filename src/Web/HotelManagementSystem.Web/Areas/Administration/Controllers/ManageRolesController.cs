@@ -28,7 +28,7 @@
 
         public async Task<IActionResult> Index()
         {
-            var roles = this.roleManager.Roles;
+            var roles = this.roleManager.Roles.OrderBy(x => x.Name);
             var viewModel = new RolesListViewModel
             {
                 Roles = new List<RoleViewModel>(),
@@ -39,6 +39,7 @@
                     .GetUsersInRoleAsync(role.Name);
                 var usersToModel = users
                     .Select(x => new KeyValuePair<string, string>(x.Id, x.UserName))
+                    .OrderBy(x => x.Value)
                     .ToList();
 
                 var roleViewModel = new RoleViewModel
@@ -60,27 +61,26 @@
             var user = this.userManager.Users.FirstOrDefault(x => x.UserName == username);
             if (user == null)
             {
+                this.TempData["CannotAddToRole"] = $"Insert valid username!";
+
                 return this.RedirectToAction(nameof(this.Index));
             }
 
             await this.userManager.AddToRoleAsync(user, role);
 
+            this.TempData["AddedToRole"] = $"Successfully added {username} to role {role}";
+
             return this.RedirectToAction(nameof(this.Index));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(string username, string role)
         {
-            var user = this.userManager.Users.FirstOrDefault(x => x.Id == id);
-            var roles = await this.userManager.GetRolesAsync(user);
-            var role = roles.FirstOrDefault();
-
-            if (role == null)
-            {
-                return this.RedirectToAction(nameof(this.Index));
-            }
+            var user = this.userManager.Users.FirstOrDefault(x => x.UserName == username);
 
             await this.userManager.RemoveFromRoleAsync(user, role);
+
+            this.TempData["RemovedFromRole"] = $"Successfully removed {username} from role {role}.";
 
             return this.RedirectToAction(nameof(this.Index));
         }

@@ -1,0 +1,93 @@
+﻿@using HotelManagementSystem.Web.ViewModels.Bookings
+@model BookingsListViewModel
+@{
+	this.ViewData["Title"] = "Bookings";
+	var bookingsCount = 0;
+}
+
+<section class="container">
+    @if (this.TempData.ContainsKey("SuccessBooked"))
+    {
+        <br />
+        <div class="alert alert-success margins-temp">@this.TempData["SuccessBooked"]</div>
+    }
+
+    @if (this.TempData.ContainsKey("SuccessCancel"))
+    {
+        <br />
+        <div class="alert alert-success margins-temp">@this.TempData["SuccessCancel"]</div>
+    }
+
+    <div class="section-top-border">
+	    <div class="progress-table-wrap">
+		    <div class="progress-table">
+			    <div class="table-head">
+				    <div class="serial" style="width:10%;">#</div>
+				    <div class="visit" style="width:23%">My info</div>
+				    <div class="visit" style="width:23%">Accommodation</div>
+				    <div class="visit" style="width:23%">Booking info</div>
+				    <div class="visit" style="width:23%">Cancel</div>
+			    </div>
+                @foreach (var booking in Model.Bookings)
+                {
+                    bookingsCount++;
+
+                    <div class="table-row">
+					    <div class="serial" style="width:8%; vertical-align: top;"><strong>@bookingsCount</strong></div>
+					    <div style="width:23%">
+                            <strong>Name:</strong> @booking.Username
+                            <br />
+                            <strong>Phone:</strong> @booking.PhoneNumber
+                            <br />
+                            <strong>Email: </strong>@booking.Email
+                        </div>
+					    <div style="width:23%">
+                            <strong>Accommodation:</strong> @booking.AccommodationName
+                            <br />
+                            <strong>Bed types:</strong>
+                            <ul class="unordered-list">
+                                @foreach (var bedType in booking.BedTypes)
+                                {
+                                    <li>@bedType</li>
+                                }
+                            </ul>
+                        </div>
+                        <div style="width: 23%;">
+                            <strong>@booking.CheckIn</strong> - <strong>@booking.CheckOut</strong> 
+                            <br />
+                            <strong>Guests:</strong> @booking.GuestsCount
+                            <br />
+                            <strong>Price:</strong> $@booking.Price.ToString("f2")
+                            <br />
+                            <strong>Facilities included:</strong>
+                            <ul class="unordered-list">
+                                @foreach (var facility in booking.Facilities)
+                                {
+                                    <li>@facility</li>
+                                }
+                            </ul>
+                        </div>
+					    <div style="width:23%">
+                            <form style="display: inline;" method="post" asp-area="" asp-controller="Bookings" asp-action="Cancel" id="deleteForm_@booking.Id" asp-route-id="@booking.Id"></form>
+                            <button style="display: inline-block;" id="deleteBtn" class="genric-btn danger" data-toggle="modal" data-target="#deleteModal_@booking.Id">Cancel</button>
+                        </div>
+				    </div>
+
+                    <div class="modal fade" tabindex="-1" role="dialog" id="deleteModal_@booking.Id">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <h4>Do you want to delete this booking?</h4>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="genric-btn primary" onclick="document.getElementById('deleteForm_@booking.Id').submit()">Yes</button>
+                                    <button type="button" class="genric-btn default" data-dismiss="modal">No</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

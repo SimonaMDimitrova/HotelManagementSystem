@@ -18,7 +18,7 @@
 
         public string Description { get; set; }
 
-        public double AdditionalPrice { get; set; }
+        public decimal AdditionalPrice { get; set; }
 
         public int Count { get; set; }
 

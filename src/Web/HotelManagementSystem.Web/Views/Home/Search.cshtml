@@ -34,7 +34,7 @@
                                 <input type="hidden" asp-for="CheckIn" />
                                 <input type="hidden" asp-for="CheckOut" />
                                 <input type="hidden" asp-for="GuestsCount" />
-                                <input type="hidden" id="Price" name="Price" value="@(accommodation.Price * Model.Days)" />
+                                <input type="hidden" id="Price" name="Price" value="@(accommodation.Price)" />
                                 <input type="hidden" id="Id" name="Id" value="@accommodation.Id" />
                                 <input type="submit" value="Book now!" class="genric-btn primary" />
                             </form>

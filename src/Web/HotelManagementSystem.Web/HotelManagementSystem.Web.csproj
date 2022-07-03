@@ -38,9 +38,7 @@
     <ProjectReference Include="..\..\Data\HotelManagementSystem.Data\HotelManagementSystem.Data.csproj" />
     <ProjectReference Include="..\..\Services\HotelManagementSystem.Services.Data\HotelManagementSystem.Services.Data.csproj" />
     <ProjectReference Include="..\..\Services\HotelManagementSystem.Services.Mapping\HotelManagementSystem.Services.Mapping.csproj" />
-    <ProjectReference Include="..\..\Services\HotelManagementSystem.Services.Messaging\HotelManagementSystem.Services.Messaging.csproj" />
     <ProjectReference Include="..\..\Services\HotelManagementSystem.Services\HotelManagementSystem.Services.csproj" />
-    <ProjectReference Include="..\HotelManagementSystem.Web.Infrastructure\HotelManagementSystem.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\HotelManagementSystem.Web.InputModels\HotelManagementSystem.Web.InputModels.csproj" />
     <ProjectReference Include="..\HotelManagementSystem.Web.ViewModels\HotelManagementSystem.Web.ViewModels.csproj" />
   </ItemGroup>

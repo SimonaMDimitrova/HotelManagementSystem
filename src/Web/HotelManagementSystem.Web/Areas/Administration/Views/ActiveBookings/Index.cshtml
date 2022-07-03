@@ -103,12 +103,12 @@
                                 <div>
                                     @if (booking.ActualCheckIn != null)
                                     {
-                                        <strong>Actual check in: </strong>@booking.ActualCheckIn?.Date.ToShortDateString()<br />
+                                        <strong>Actual check in: </strong>@booking.ActualCheckIn?.ToString("dd/MM/yyyy HH:mm")<br />
                                     }
 
                                     @if (booking.ActualCheckOut != null)
                                     {
-                                        <strong>Actual check out: </strong>@booking.ActualCheckIn?.Date.ToShortDateString()<br />
+                                        <strong>Actual check out: </strong>@booking.ActualCheckIn?.ToString("dd/MM/yyyy HH:mm")<br />
                                     }
 
                                     <strong>Is paid:</strong> @booking.IsPaid

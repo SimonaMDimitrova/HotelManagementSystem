@@ -9,7 +9,7 @@
         [Display(Name = "Check in")]
         public DateTime? CheckIn { get; set; }
 
-        [Display(Name = "Check in")]
+        [Display(Name = "Check out")]
         public DateTime? CheckOut { get; set; }
 
         [Display(Name = "Is paid")]

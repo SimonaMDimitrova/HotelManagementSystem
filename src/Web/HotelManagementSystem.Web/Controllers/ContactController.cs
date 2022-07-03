@@ -1,7 +1,6 @@
 ﻿namespace HotelManagementSystem.Web.Controllers
 {
     using HotelManagementSystem.Services.Data;
-    using HotelManagementSystem.Services.Messaging;
     using HotelManagementSystem.Web.InputModels.Contact;
     using HotelManagementSystem.Web.ViewModels.Contact;
     using Microsoft.AspNetCore.Mvc;

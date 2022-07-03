@@ -30,14 +30,16 @@
 
         public string CheckOut { get; set; }
 
-        public string CheckIn { get; set; }
+        public DateTime CheckIn { get; set; }
+
+        public string CheckInString { get; set; }
 
         public string PID { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Booking, BookingViewModel>()
-                .ForMember(x => x.CheckIn, opt =>
+                .ForMember(x => x.CheckInString, opt =>
                     opt.MapFrom(x => x.CheckIn.ToShortDateString()))
                 .ForMember(x => x.CheckOut, opt =>
                     opt.MapFrom(x => x.CheckOut.ToShortDateString()))

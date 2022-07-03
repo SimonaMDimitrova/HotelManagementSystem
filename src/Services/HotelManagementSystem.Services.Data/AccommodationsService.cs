@@ -71,7 +71,7 @@
 
         public IEnumerable<T> GetAvailable<T>(AccommodationSearchInputModel<T> input)
         {
-            if (input.CheckIn < DateTime.UtcNow || input.CheckOut <= input.CheckIn)
+            if (input.CheckOut <= input.CheckIn)
             {
                 return null;
             }

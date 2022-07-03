@@ -34,6 +34,8 @@
                     <label>From</label>
                     <input asp-for="StartOfTheWorkingDayHour" class="form-control col-md-3 d-md-inline-block" /> h
                     <input asp-for="StartOfTheWorkingDayMinutes" class="form-control col-md-3 d-md-inline-block" /> min
+                    <br />
+                    <span asp-validation-for="StartOfTheWorkingDayHour" class="text-danger"></span>
                 </div>
                 
 
@@ -41,9 +43,9 @@
                     <label>To</label>
                     <input asp-for="EndOfTheWorkingDayHour" class="form-control col-md-3 d-md-inline-block" /> h
                     <input asp-for="EndOfTheWorkingDayMinutes" class="form-control col-md-3 d-md-inline-block" /> min
+                    <br />
+                    <span asp-validation-for="EndOfTheWorkingDayHour" class="text-danger"></span>
                 </div>
-                <span asp-validation-for="StartOfTheWorkingDayHour" class="text-danger"></span>
-                <span asp-validation-for="EndOfTheWorkingDayHour" class="text-danger"></span>
             </div>
             <div class="justify-content-center">
                 <button class="genric-btn primary mx-auto d-block">Apply changes</button>

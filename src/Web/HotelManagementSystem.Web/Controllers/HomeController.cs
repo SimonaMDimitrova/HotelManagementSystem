@@ -57,6 +57,11 @@
             {
                 input.Accommodations = accommodations;
                 input.Days = (int)(input.CheckOut - input.CheckIn)?.TotalDays;
+
+                foreach (var accommodation in accommodations)
+                {
+                    accommodation.Price *= input.Days;
+                }
             }
 
             return this.View(input);
@@ -82,7 +87,7 @@
                 viewModel.User = userInfo;
             }
 
-            var facilities = this.facilitiesService.GetAll<FacilityInputModel>();
+            var facilities = this.facilitiesService.GetAllAvailable<FacilityInputModel>();
             var bedTypes = this.bedTypesService.GetAllByAccommodationId(id);
 
             viewModel.Facilities = facilities;
@@ -95,6 +100,7 @@
         public async Task<IActionResult> Add(BookingInputModel input)
         {
             var username = this.User.Identity.Name;
+            input.User.Username = username;
             if (!this.ModelState.IsValid)
             {
                 var facilities = this.facilitiesService.GetAll<FacilityInputModel>();

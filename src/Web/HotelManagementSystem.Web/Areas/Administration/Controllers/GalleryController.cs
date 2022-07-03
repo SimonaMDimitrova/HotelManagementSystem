@@ -44,7 +44,7 @@
             }
             catch (System.Exception)
             {
-                this.TempData["NotAddedImages"] = $"We couldn't add your images.";
+                this.TempData["NoImagesWereAdded"] = $"We couldn't add your images.";
 
                 return this.RedirectToAction(nameof(this.Index));
             }

@@ -22,8 +22,7 @@
                 .ForMember(x => x.Price, opt =>
                     opt.MapFrom(x =>
                         x.AdditionalPrice
-                        + (x.AccommodationBedTypes.Sum(a => a.BedType.Capacity)
-                        * x.AccommodationBedTypes.Sum(a => a.BedType.Price))));
+                        + (x.AccommodationBedTypes.Sum(a => a.BedType.Capacity * a.BedType.Price))));
         }
     }
 }

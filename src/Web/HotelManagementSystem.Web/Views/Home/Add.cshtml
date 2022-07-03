@@ -49,7 +49,7 @@
                     <div id="facilities-ids">
                         @foreach (var facility in Model.Facilities)
                         {
-                            <div style="width: 30%; display: inline-block;">
+                            <div style="width: 35%; display: inline-block;">
                                 @if (facility.PricePerDay == 0)
                                 {
                                     <input id="facility_@facility.Id"
@@ -69,7 +69,7 @@
                                         class="primary-checkbox"
                                         checked
                                         price="@(facility.PricePerDay * Model.Days)"
-                                        value="@facility.Id" />
+                                        value="@facility.Id" /> 
                                 }
                                 else
                                 {
@@ -81,12 +81,12 @@
                                         value="@facility.Id" />
                                 }
 
-                                <label for="facility_@facility.Id">@facility.Name</label>
+                                <label for="facility_@facility.Id">@facility.Name (+ @(facility.PricePerDay * Model.Days))</label>
                             </div>
                         }
                     </div>
 					<hr />
-					<input type="submit" value="Book now!" class="genric-btn primary">
+					<input type="submit" value="Book now!" class="genric-btn primary" />
 				</form>
             </div>
         </div>

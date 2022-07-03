@@ -13,13 +13,13 @@
         <form method="get">
             <div class="form-group row">
                 <label asp-for="CheckIn"></label>
-                <input asp-for="CheckIn" class="form-control" />
+                <input asp-for="CheckIn" type="date" class="form-control" />
                 <span asp-validation-for="CheckIn" class="text-danger"></span>
             </div>
 
             <div class="form-group row">
                 <label asp-for="CheckOut"></label>
-                <input asp-for="CheckOut" class="form-control" />
+                <input asp-for="CheckOut" type="date" class="form-control" />
                 <span asp-validation-for="CheckOut" class="text-danger"></span>
             </div>
 
@@ -84,3 +84,14 @@
     }
 </section>
 <br />
+
+<script>
+    $(document).ready(function () {
+        $('#CheckIn').datetimepicker({
+            lang: 'en',
+            timepicker: false,
+            closeOnDateSelect: true,
+            dateFormat: "yy/mm/dd"  
+        });
+    });
+</script>

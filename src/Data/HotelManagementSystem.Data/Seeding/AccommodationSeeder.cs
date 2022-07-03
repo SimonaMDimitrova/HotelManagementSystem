@@ -87,7 +87,7 @@
 
             var triple = new Accommodation
             {
-                Name = "Trilpe room",
+                Name = "Triple room",
                 ImageName = "tripple-one-with-doubles.jpg",
                 Count = 5,
                 AdditionalPrice = 18,

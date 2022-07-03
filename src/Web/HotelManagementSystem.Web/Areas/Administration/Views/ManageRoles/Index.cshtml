@@ -35,13 +35,13 @@
                 <div class="card col-md-5 d-inline-block" style="padding: 0; vertical-align: top;">
                     <div class="card-header" id="heading_@role.Id">
                         <h5 class="mb-0">
-                        <button onclick="viewRoleUsers('heading_@role.Id')" class="btn btn-link" style="color: #f8b600;" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <button class="btn btn-link" style="color: #f8b600;" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                             <strong>@role.Name</strong>
                         </button>
                         </h5>
                     </div>
 
-                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                         <div class="card-body">
                             @{
                                 if (!role.Users.Any())
@@ -81,7 +81,7 @@
 </section>
 <br />
 
-@section Scripts
+@*@section Scripts
 {
     <script>
         let elementToBeShowned = '';
@@ -106,3 +106,4 @@
 
     </script>
 }
+*@

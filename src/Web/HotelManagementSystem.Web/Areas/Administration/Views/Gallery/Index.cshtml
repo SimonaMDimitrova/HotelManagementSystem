@@ -21,14 +21,14 @@
         <div class="alert alert-success margins-temp">@this.TempData["RemovedImage"]</div>
     }
 
-    @if (this.TempData.ContainsKey("NotAddedImages"))
+    @if (this.TempData.ContainsKey("NoImagesWereAdded"))
     {
         <br />
-        <div class="alert alert-danger margins-temp">@this.TempData["NotAddedImages"]</div>
+        <div class="alert alert-danger margins-temp">@this.TempData["NoImagesWereAdded"]</div>
     }
 
     <div class="welcome text-left">
-        <a class="genric-btn primary" asp-area="Administration" asp-controller="Gallery" asp-action="Add">Add new photo</a>
+        <a class="genric-btn primary" asp-area="Administration" asp-controller="Gallery" asp-action="Add">Add new photos</a>
 
         <hr />
         @{

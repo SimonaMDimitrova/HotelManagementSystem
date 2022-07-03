@@ -29,7 +29,7 @@
             <div class="container">
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <!-- Brand and toggle get grouped for better mobile display -->
-                    <a class="navbar-brand logo_h" href="index.html"><img src="~/general/image/Logo.png" alt=""></a>
+                    <a class="navbar-brand logo_h" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/general/image/Logo.png" alt=""></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -38,25 +38,25 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                         <ul class="nav navbar-nav menu_nav ml-auto" id="nav-bar">
-                            <li class="nav-item active"><a class="nav-link" asp-area="" asp-controller="Home">Home</a></li> 
-                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="AboutUs">About us</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Accommodations">Accommodations</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Gallery">Gallery</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Contact">Contact</a></li>
+                            <li class="nav-item active"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="">Home</a></li> 
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="AboutUs" asp-action="">About us</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Accommodations" asp-action="">Accommodations</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Gallery" asp-action="">Gallery</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Contact" asp-action="">Contact</a></li>
                             @if (this.SignInManager.IsSignedIn(this.User))
                             {
-                                <li class="nav-item"><a class="nav-link" asp-controller="Bookings">Bookings</a></li>
+                                <li class="nav-item"><a class="nav-link" asp-controller="Bookings" asp-action="">Bookings</a></li>
 
                                 if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
                                 {
                                     <li class="nav-item">
-                                        <a class="nav-link" asp-area="Administration" asp-controller="General">Admin panel</a>
+                                        <a class="nav-link" asp-area="Administration" asp-controller="General" asp-action="">Admin panel</a>
                                     </li> 
                                 }
                                 else if (this.User.IsInRole(GlobalConstants.ReceptionistRoleName))
                                 {
                                     <li class="nav-item">
-                                        <a class="nav-link" asp-area="Administration" asp-controller="ActiveBookings">Admin panel</a>
+                                        <a class="nav-link" asp-area="Administration" asp-controller="ActiveBookings" asp-action="">Admin panel</a>
                                     </li> 
                                 }
                                 <li class="nav-item">

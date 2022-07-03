@@ -6,7 +6,7 @@
 <section class="contact_area section_gap">
     <div class="container">
         <div class="mapBox" style="position: relative; bottom: 40px;">
-            <iframe width="1109" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=Sonesta%20St.%20George%20Hotel%20-%20Luxor,%20Khaled%20Ibn%20Al%20Walid,%20Gazirat%20Al%20Awameyah,%20Luxor,%20Luxor%20Governorate%201362003,%20Egypt&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+            <iframe width="1139" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=Sonesta%20St.%20George%20Hotel%20-%20Luxor,%20Khaled%20Ibn%20Al%20Walid,%20Gazirat%20Al%20Awameyah,%20Luxor,%20Luxor%20Governorate%201362003,%20Egypt&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
         </div>
 
         <div class="row">
@@ -33,7 +33,7 @@
                 <form class="row contact_form" action="javascript:void(0);" method="post" id="contactForm">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="fromName" name="fromName" placeholder="Enter your name">
+                            <input type="text" class="form-control" id="fromName" name="from_name" placeholder="Enter your name">
                         </div>
                         <div class="form-group">
                             @{
@@ -72,7 +72,7 @@
         contactForm.addEventListener("submit", (e) => {
             const data = Object.fromEntries(new FormData(e.target).entries());
             console.log(e.target)
-            emailjs.send('service_96allcn', 'template_mb11fr8', data, "NkrK2L9jgcu6lSu_q")
+            emailjs.send("service_0h47pxl", "template_j3v330o", data)
                 .then(function() {
                     console.log('SUCCESS!');
                 }, function(error) {

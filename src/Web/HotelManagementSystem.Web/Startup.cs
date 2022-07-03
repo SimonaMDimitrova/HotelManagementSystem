@@ -11,7 +11,6 @@
     using HotelManagementSystem.Services;
     using HotelManagementSystem.Services.Data;
     using HotelManagementSystem.Services.Mapping;
-    using HotelManagementSystem.Services.Messaging;
     using HotelManagementSystem.Web.InputModels.Area.Administration.General;
     using HotelManagementSystem.Web.ViewModels;
 
@@ -67,7 +66,6 @@
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
-            services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<IAboutUsInfoService, AboutUsInfoService>();
             services.AddTransient<IContactService, ContactService>();
             services.AddTransient<IFacilitiesService, FacilitiesService>();

@@ -53,7 +53,7 @@
         private bool IsHourValid(int hour)
         {
             var isValid = true;
-            if (hour < 0 || hour > 24)
+            if (hour < 0 || hour > 23)
             {
                 isValid = false;
             }
@@ -64,7 +64,7 @@
         private bool IsMinuteValid(int minutes)
         {
             var isValid = true;
-            if (minutes < 0 || minutes > 60)
+            if (minutes < 0 || minutes > 59)
             {
                 isValid = false;
             }

@@ -11,20 +11,16 @@
     <div class="col-md-4">
         <section>
             <form id="account" method="post">
-                <h1>@ViewData["Title"]</h1>
-                <h2>Use your account to log in.</h2>
-                <hr />
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-floating">
-                    <label asp-for="Input.Email" class="form-label"></label>
-                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+                <h3 class="mb-30 title_color">Use your account to log in</h3>
+                <div class="mt-10">
+				    <input style="border: 1px solid #ced4da;" class="single-input-primary" placeholder="Email ..." asp-for="Input.Email" />
                     <span asp-validation-for="Input.Email" class="text-danger"></span>
-                </div>
-                <div class="form-floating">
-                    <label asp-for="Input.Password" class="form-label"></label>
-                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" />
+			    </div>
+
+                <div class="mt-10">
+				    <input style="border: 1px solid #ced4da;" class="single-input-primary" placeholder="Password ..." asp-for="Input.Password" />
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
+			    </div>
                 <hr />
                 <div style="position: relative; left: 21px;">
                     <div class="checkbox">
